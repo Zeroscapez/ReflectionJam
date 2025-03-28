@@ -1,7 +1,7 @@
 # ReflectionJam
 Beginner Game Jam 2025 Project
 
-#Controls
+# Controls
 
 X/Space - Jump 
 O/E - Interact
