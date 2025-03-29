@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 5647214}
   - component: {fileID: 5647213}
   - component: {fileID: 5647212}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,12 +470,21 @@ MonoBehaviour:
   ID: 2
   maxSpeed: 10
   movementForce: 1
-  maxJumpHeight: 10
-  minJumpImpulse: 5
+  maxJumpHeight: 6
+  minJumpImpulse: 1
   maxJumpHoldTime: 0.3
   coyoteTime: 0.1
   jumpBufferTime: 0.1
-  groundDistance: 1
+  maxJumps: 1
+  maxFallSpeed: 20
+  fastFallAcceleration: 60
+  airControlMultiplier: 0.5
+  groundDistance: 1.25
+  groundCheck: {fileID: 1986797137}
+  groundRadius: 0.3
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
   manager: {fileID: 1942982580}
   playerCamera: {fileID: 963194227}
 --- !u!54 &175635270
@@ -770,12 +779,21 @@ MonoBehaviour:
   ID: 1
   maxSpeed: 10
   movementForce: 1
-  maxJumpHeight: 10
-  minJumpImpulse: 5
+  maxJumpHeight: 6
+  minJumpImpulse: 1
   maxJumpHoldTime: 0.3
   coyoteTime: 0.1
   jumpBufferTime: 0.1
+  maxJumps: 1
+  maxFallSpeed: 20
+  fastFallAcceleration: 60
+  airControlMultiplier: 0.5
   groundDistance: 1.25
+  groundCheck: {fileID: 1986797137}
+  groundRadius: 0.3
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
   manager: {fileID: 1942982580}
   playerCamera: {fileID: 963194227}
 --- !u!136 &711321800

@@ -23,6 +23,8 @@ public class CharacterController3D : MonoBehaviour
     [SerializeField] private float maxJumpHoldTime = 0.3f;    // How long extra upward force can be applied
     [SerializeField] private float coyoteTime = 0.1f;         // Time after leaving the ground when a jump is still allowed
     [SerializeField] private float jumpBufferTime = 0.1f;     // Time before landing that jump input is buffered
+    [SerializeField] private int maxJumps = 2;                // Maximum number of jumps (allows double jump)
+    private int jumpCount = 0;                               // Number of jumps performed since last grounded
 
     // Timers and state variables for jump buffering & coyote time
     private float lastGroundedTime = Mathf.Infinity; // Time since last on ground
@@ -32,8 +34,18 @@ public class CharacterController3D : MonoBehaviour
     private bool isHoldingJump;
     private bool jumpInput;
 
+    [Header("Fast Fall Settings")]
+
+    [SerializeField] private float maxFallSpeed = 20f;          // Maximum downward speed
+    [SerializeField] private float fastFallAcceleration = 10f; // Additional downward acceleration (gradual fast fall)
+   
+    [SerializeField] private float airControlMultiplier = 0.5f;  // Multiplier for horizontal movement when in the air
+
     [Header("Ground Check")]
     public float groundDistance = 0.2f;
+    [SerializeField] private Transform groundCheck;           // Assign a child object at the character's feet
+    [SerializeField] private float groundRadius = 0.3f;         // Radius for sphere check
+    [SerializeField] private LayerMask groundMask;              // Layer mask for ground
 
     private Vector3 forceDirection = Vector3.zero;
 
@@ -60,6 +72,7 @@ public class CharacterController3D : MonoBehaviour
         if (IsGrounded())
         {
             lastGroundedTime = 0;
+            jumpCount = 0;  // Reset jump count when grounded.
         }
         else
         {
@@ -72,6 +85,7 @@ public class CharacterController3D : MonoBehaviour
             lastJumpPressTime += Time.deltaTime;
         }
     }
+
 
     void OnEnable()
     {
@@ -92,27 +106,29 @@ public class CharacterController3D : MonoBehaviour
         HandleBufferedJump();
         HandleJumpHold();
         HandleMovement();
+        ApplyFastFall();
     }
 
     private void HandleMovement()
     {
         Vector2 moveInput = move.ReadValue<Vector2>();
-        forceDirection += moveInput.x * GetCameraRight(playerCamera) * movementForce;
-        forceDirection += moveInput.y * GetCameraForward(playerCamera) * movementForce;
+        float controlMultiplier = IsGrounded() ? 1f : airControlMultiplier; // Use air control if not grounded
+        forceDirection += moveInput.x * GetCameraRight(playerCamera) * movementForce * controlMultiplier;
+        forceDirection += moveInput.y * GetCameraForward(playerCamera) * movementForce * controlMultiplier;
 
         rb.AddForce(forceDirection, ForceMode.Impulse);
         forceDirection = Vector3.zero;
 
-        // Clamp horizontal velocity
+        // Clamp horizontal velocity as before.
         Vector3 horizontalVelocity = rb.velocity;
         horizontalVelocity.y = 0;
         if (horizontalVelocity.sqrMagnitude > maxSpeed * maxSpeed)
         {
             rb.velocity = horizontalVelocity.normalized * maxSpeed + Vector3.up * rb.velocity.y;
         }
-
         LookAt();
     }
+
 
     private void LookAt()
     {
@@ -142,26 +158,27 @@ public class CharacterController3D : MonoBehaviour
         return right.normalized;
     }
 
-    // Check for buffered jump input and coyote time.
+    // Check for buffered jump input, coyote time, and allow double jump.
     private void HandleBufferedJump()
     {
-        // Only initiate a jump if not already jumping, the jump was pressed recently,
-        // and the character was grounded within the allowed coyote time.
-        if (!isJumping && lastJumpPressTime < jumpBufferTime && lastGroundedTime < coyoteTime)
+        // Allow a jump if the jump was pressed recently and either:
+        // the character is grounded (or within coyote time) or a double jump is available.
+        if (lastJumpPressTime < jumpBufferTime && (IsGrounded() || lastGroundedTime < coyoteTime || jumpCount < maxJumps))
         {
             float maxJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(Physics.gravity.y) * maxJumpHeight);
-            // Initiate the jump with the minimum impulse.
+            // Initiate jump: reset vertical velocity to ensure a consistent jump.
             rb.velocity = new Vector3(rb.velocity.x, minJumpImpulse, rb.velocity.z);
             isJumping = true;
             jumpHoldStartTime = Time.time;
-
-            // Consume the buffered jump and coyote time.
+            jumpCount++;  // Count this jump.
+                          // Consume the buffered jump and coyote time.
             lastJumpPressTime = jumpBufferTime;
             lastGroundedTime = coyoteTime;
         }
     }
 
-    // While the jump button is held and within max hold time, add extra upward velocity.
+
+    // While the jump button is held and within the max hold time, add extra upward velocity.
     private void HandleJumpHold()
     {
         if (isJumping && isHoldingJump)
@@ -170,21 +187,33 @@ public class CharacterController3D : MonoBehaviour
             float holdDuration = Time.time - jumpHoldStartTime;
             if (holdDuration < maxJumpHoldTime)
             {
-                // Calculate extra acceleration such that, if held fully, the jump velocity reaches maxJumpVelocity.
                 float extraAcceleration = (maxJumpVelocity - minJumpImpulse) / maxJumpHoldTime;
                 rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y + extraAcceleration * Time.fixedDeltaTime, rb.velocity.z);
+                rb.velocity = new Vector3(rb.velocity.x, Mathf.Min(rb.velocity.y, maxJumpVelocity), rb.velocity.z);
             }
         }
     }
 
-    // Process jump input only if the character is on the ground (or within the coyote time window).
+    // Increase falling speed when falling until a maximum fall speed is reached.
+    private void ApplyFastFall()
+    {
+        if (rb.velocity.y < 0)
+        {
+            // Gradually add extra downward acceleration.
+            float newVelocityY = rb.velocity.y - fastFallAcceleration * Time.fixedDeltaTime;
+            // Clamp the downward velocity to not exceed -maxFallSpeed.
+            newVelocityY = Mathf.Max(newVelocityY, -maxFallSpeed);
+            rb.velocity = new Vector3(rb.velocity.x, newVelocityY, rb.velocity.z);
+        }
+    }
+
+
     private void OnJumpPerformed(InputAction.CallbackContext context)
     {
-        // Only accept jump input if grounded or just left ground within coyote time.
-        if (!IsGrounded() && lastGroundedTime >= coyoteTime)
+        // Allow jump if the player hasn't used all available jumps.
+        if (jumpCount >= maxJumps)
         {
-            // If we've been in the air too long, ignore the jump input.
-            return;
+            return; // Prevent further jumps if already used up.
         }
         jumpInput = true;
         lastJumpPressTime = 0;
@@ -192,11 +221,12 @@ public class CharacterController3D : MonoBehaviour
         isHoldingJump = true;
     }
 
+
     private void OnJumpCanceled(InputAction.CallbackContext context)
     {
         jumpInput = false;
         isHoldingJump = false;
-        // End the jump hold immediately.
+        // End the jump hold.
         isJumping = false;
     }
 
@@ -214,9 +244,9 @@ public class CharacterController3D : MonoBehaviour
         }
     }
 
+    // Robust ground check using a sphere.
     private bool IsGrounded()
     {
-        // Cast a ray downward from the character's position.
-        return Physics.Raycast(transform.position, Vector3.down, groundDistance);
+        return Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
     }
 }
