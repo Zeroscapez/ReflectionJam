@@ -24,7 +24,7 @@ public class CharacterController3D : MonoBehaviour
     [SerializeField] private float coyoteTime = 0.1f;         // Time after leaving the ground when a jump is still allowed
     [SerializeField] private float jumpBufferTime = 0.1f;     // Time before landing that jump input is buffered
     [SerializeField] private int maxJumps = 2;                // Maximum number of jumps (allows double jump)
-    private int jumpCount = 0;                               // Number of jumps performed since last grounded
+    [SerializeField] private int jumpCount = 0;                               // Number of jumps performed since last grounded
 
     // Timers and state variables for jump buffering & coyote time
     private float lastGroundedTime = Mathf.Infinity; // Time since last on ground
@@ -68,23 +68,22 @@ public class CharacterController3D : MonoBehaviour
 
     private void Update()
     {
-        // Update grounded timer: if on ground, reset; otherwise, accumulate.
         if (IsGrounded())
         {
             lastGroundedTime = 0;
-            jumpCount = 0;  // Reset jump count when grounded.
+            jumpCount = 0; // Reset jump count when grounded
         }
         else
         {
             lastGroundedTime += Time.deltaTime;
         }
 
-        // Only accumulate jump press time when jump input is not active.
         if (!jumpInput)
         {
             lastJumpPressTime += Time.deltaTime;
         }
     }
+
 
 
     void OnEnable()
@@ -161,20 +160,31 @@ public class CharacterController3D : MonoBehaviour
     // Check for buffered jump input, coyote time, and allow double jump.
     private void HandleBufferedJump()
     {
-        // Allow a jump if the jump was pressed recently and either:
-        // the character is grounded (or within coyote time) or a double jump is available.
-        if (lastJumpPressTime < jumpBufferTime && (IsGrounded() || lastGroundedTime < coyoteTime || jumpCount < maxJumps))
+        // Check if the jump input was pressed recently and if we're allowed to jump
+        if (lastJumpPressTime < jumpBufferTime)
         {
-            float maxJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(Physics.gravity.y) * maxJumpHeight);
-            // Initiate jump: reset vertical velocity to ensure a consistent jump.
-            rb.velocity = new Vector3(rb.velocity.x, minJumpImpulse, rb.velocity.z);
-            isJumping = true;
-            jumpHoldStartTime = Time.time;
-            jumpCount++;  // Count this jump.
-                          // Consume the buffered jump and coyote time.
-            lastJumpPressTime = jumpBufferTime;
-            lastGroundedTime = coyoteTime;
+            // If grounded or within coyote time, perform a jump without consuming a double jump
+            if (IsGrounded() || lastGroundedTime < coyoteTime)
+            {
+                PerformJump();
+                lastJumpPressTime = jumpBufferTime; // Consume the buffered jump
+                lastGroundedTime = coyoteTime;      // Consume coyote time
+            }
+            // Allow double jump if no coyote time jump was performed and jumps are remaining
+            else if (jumpCount < maxJumps)
+            {
+                PerformJump();
+                jumpCount++; // Consume a double jump
+            }
         }
+    }
+
+    private void PerformJump()
+    {
+        // Reset vertical velocity to ensure a consistent jump
+        rb.velocity = new Vector3(rb.velocity.x, minJumpImpulse, rb.velocity.z);
+        isJumping = true;
+        jumpHoldStartTime = Time.time;
     }
 
 
@@ -210,16 +220,12 @@ public class CharacterController3D : MonoBehaviour
 
     private void OnJumpPerformed(InputAction.CallbackContext context)
     {
-        // Allow jump if the player hasn't used all available jumps.
-        if (jumpCount >= maxJumps)
-        {
-            return; // Prevent further jumps if already used up.
-        }
         jumpInput = true;
         lastJumpPressTime = 0;
         jumpHoldStartTime = Time.time;
         isHoldingJump = true;
     }
+
 
 
     private void OnJumpCanceled(InputAction.CallbackContext context)
