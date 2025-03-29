@@ -11,6 +11,8 @@ public class JumpPad : MonoBehaviour
         // Check if the object has a Rigidbody (so it's a movable object)
         Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
 
+
+
         if (rb != null)
         {
             // Apply an upward force to the object's Rigidbody
