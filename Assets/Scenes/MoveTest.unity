@@ -471,14 +471,14 @@ MonoBehaviour:
   maxSpeed: 10
   movementForce: 1
   maxJumpHeight: 6
-  minJumpImpulse: 1
+  minJumpImpulse: 6
   maxJumpHoldTime: 0.3
-  coyoteTime: 0.1
+  coyoteTime: 0.5
   jumpBufferTime: 0.1
-  maxJumps: 1
+  maxJumps: 2
   jumpCount: 0
   maxFallSpeed: 20
-  fastFallAcceleration: 60
+  fastFallAcceleration: 35
   airControlMultiplier: 0.5
   groundDistance: 1.25
   groundCheck: {fileID: 1986797137}
@@ -783,7 +783,7 @@ MonoBehaviour:
   maxJumpHeight: 6
   minJumpImpulse: 6
   maxJumpHoldTime: 0.3
-  coyoteTime: 0.1
+  coyoteTime: 0.5
   jumpBufferTime: 0.1
   maxJumps: 2
   jumpCount: 0
