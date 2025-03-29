@@ -104,9 +104,24 @@ public class CharacterController3D : MonoBehaviour
     {
         HandleBufferedJump();
         HandleJumpHold();
+        // If the player is attached to a moving platform, override their vertical velocity.
+        if (transform.parent != null && transform.parent.CompareTag("MovingPlatform"))
+        {
+            PlatformVelocity platformVel = transform.parent.GetComponent<PlatformVelocity>();
+            if (platformVel != null)
+            {
+                // Override only the Y component to match the platform’s Y velocity.
+                rb.velocity = new Vector3(rb.velocity.x, platformVel.CurrentVelocity.y, rb.velocity.z);
+            }
+        }
+
+        // Then continue with your normal movement, jump, and fast-fall handling.
+       
+        
         HandleMovement();
         ApplyFastFall();
     }
+
 
     private void HandleMovement()
     {
@@ -160,32 +175,50 @@ public class CharacterController3D : MonoBehaviour
     // Check for buffered jump input, coyote time, and allow double jump.
     private void HandleBufferedJump()
     {
-        // Check if the jump input was pressed recently and if we're allowed to jump
-        if (lastJumpPressTime < jumpBufferTime)
+        // Only process jump if the jump input was registered recently.
+        if (jumpInput && lastJumpPressTime < jumpBufferTime)
         {
-            // If grounded or within coyote time, perform a jump without consuming a double jump
+            // Condition 1: Jump from ground (or within coyote time)
             if (IsGrounded() || lastGroundedTime < coyoteTime)
             {
                 PerformJump();
-                lastJumpPressTime = jumpBufferTime; // Consume the buffered jump
-                lastGroundedTime = coyoteTime;      // Consume coyote time
+                // Reset timers so the buffered jump is consumed.
+                lastJumpPressTime = jumpBufferTime;
+                lastGroundedTime = coyoteTime;
             }
-            // Allow double jump if no coyote time jump was performed and jumps are remaining
-            else if (jumpCount < maxJumps)
+            // Condition 2: Allow double jump if we're already in the air
+            else if (jumpCount < maxJumps - 1) // subtract one if the initial jump is counted separately
             {
                 PerformJump();
-                jumpCount++; // Consume a double jump
+                jumpCount++; // Consume one jump
             }
         }
     }
 
+
     private void PerformJump()
     {
-        // Reset vertical velocity to ensure a consistent jump
-        rb.velocity = new Vector3(rb.velocity.x, minJumpImpulse, rb.velocity.z);
+
+        if (transform.parent != null && transform.parent.CompareTag("MovingPlatform"))
+        {
+            Rigidbody platformRb = transform.parent.GetComponent<Rigidbody>();
+            if (platformRb != null)
+            {
+                rb.velocity += platformRb.velocity;
+            }
+        }
+        // Add jump impulse on top of the current vertical velocity.
+        rb.AddForce(Vector3.up * minJumpImpulse, ForceMode.Impulse);
         isJumping = true;
         jumpHoldStartTime = Time.time;
+        // Optionally, you can also reset jumpInput here to ensure the buffered jump is consumed.
+        jumpInput = false;
+
+        
+
     }
+
+
 
 
     // While the jump button is held and within the max hold time, add extra upward velocity.
@@ -220,11 +253,41 @@ public class CharacterController3D : MonoBehaviour
 
     private void OnJumpPerformed(InputAction.CallbackContext context)
     {
-        jumpInput = true;
-        lastJumpPressTime = 0;
+        Vector3 platformVelocity = Vector3.zero;
+
+        if (transform.parent != null && transform.parent.CompareTag("MovingPlatform"))
+        {
+            PlatformVelocity platformVel = transform.parent.GetComponent<PlatformVelocity>();
+            if (platformVel != null)
+            {
+                platformVelocity = platformVel.CurrentVelocity;
+            }
+            transform.parent = null; // Unparent the player from the platform
+        }
+
+        // Subtract the platform's velocity from the player's velocity
+
+        if (platformVelocity.y <= -1)
+        {
+            rb.velocity -= platformVelocity;
+        } else if (platformVelocity.y >= 0)
+        {
+            rb.velocity += platformVelocity;
+        }
+
+
+            // Apply the jump force
+            rb.AddForce(Vector3.up * minJumpImpulse, ForceMode.Impulse);
+
+        isJumping = true;
         jumpHoldStartTime = Time.time;
         isHoldingJump = true;
     }
+
+
+
+
+
 
 
 
@@ -253,6 +316,7 @@ public class CharacterController3D : MonoBehaviour
     // Robust ground check using a sphere.
     private bool IsGrounded()
     {
-        return Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
+        return Physics.Raycast(transform.position, Vector3.down, groundDistance + 0.1f, groundMask);
     }
+
 }
