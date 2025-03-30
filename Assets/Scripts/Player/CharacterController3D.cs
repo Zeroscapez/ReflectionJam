@@ -55,14 +55,14 @@ public class CharacterController3D : MonoBehaviour
     [SerializeField]
     private Camera playerCamera;
     private InputAction move;
-
+    private Vector3 playerScale;
     private void Awake()
     {
         manager = FindObjectOfType<PlayerManager>();
         controls = new PlayerControls();
         rb = GetComponent<Rigidbody>();
         playerCamera = manager.pCam;
-
+        playerScale = transform.localScale;
         controls.Player.Interact.performed += ctx => Interact();
     }
 
@@ -82,6 +82,7 @@ public class CharacterController3D : MonoBehaviour
         {
             lastJumpPressTime += Time.deltaTime;
         }
+        transform.localScale = playerScale;
     }
 
 
