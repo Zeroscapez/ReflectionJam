@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8562318418841792529}
   - component: {fileID: 2834558397029048467}
   - component: {fileID: 7134718823788261745}
-  - component: {fileID: 2093055832515276026}
+  - component: {fileID: 4597985472581475555}
   m_Layer: 3
   m_Name: up&downPLATFORM
   m_TagString: MovingPlatform
@@ -404,6 +404,8 @@ MonoBehaviour:
   moveSpeed: 5
   moveHeight: 15
   startGoingUp: 1
+  moveEnabled: 1
+  rotateEnabled: 0
 --- !u!65 &2834558397029048467
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -452,7 +454,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2093055832515276026
+--- !u!114 &4597985472581475555
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -461,6 +463,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3363028454489411027}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d260c884aa7519442aad8c41912e4cf6, type: 3}
+  m_Script: {fileID: 11500000, guid: 31ca88882bc3eb44681dcb108c996dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveHeight: 2
+  moveSpeed: 1
+  startGoingUp: 1

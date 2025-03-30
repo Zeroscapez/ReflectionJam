@@ -3943,7 +3943,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4650903526215462291}
-  - component: {fileID: 7995539652166912988}
+  - component: {fileID: 5030116033447025081}
   m_Layer: 3
   m_Name: Tube01
   m_TagString: Untagged
@@ -3968,7 +3968,7 @@ Transform:
   - {fileID: 3677698866854579163}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7995539652166912988
+--- !u!114 &5030116033447025081
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3977,11 +3977,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1530647413735169623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9f3c068ea4e8a94a9a67fc67f1c84bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 31ca88882bc3eb44681dcb108c996dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  moveHeight: 6
+  moveHeight: 2
+  moveSpeed: 1
   startGoingUp: 1
 --- !u!1 &1599982386013794847
 GameObject:
