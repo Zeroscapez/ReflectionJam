@@ -9,22 +9,26 @@ public class MovingPlatform : MonoBehaviour
     [Tooltip("Movement speed of the platform")]
     public float moveSpeed = 1f;
     [Tooltip("Determines if the platform starts by moving up")]
-    public bool startsMovingUp = true;
+    public bool startGoingUp = true;
 
     private Vector3 startPosition;
     private float directionMultiplier;
     private List<Rigidbody> playersOnPlatform = new List<Rigidbody>();
 
+    private float offset;
+
     void Start()
     {
         startPosition = transform.position;
-        directionMultiplier = startsMovingUp ? 1f : -1f;
+       
+
+        offset = startGoingUp ? 0f : moveHeight;
     }
 
     void FixedUpdate()
     {
         // Calculate the new Y position using a sine wave with direction control
-        float newY = startPosition.y + moveHeight * Mathf.Sin(Time.time * moveSpeed) * directionMultiplier;
+        float newY = Mathf.PingPong(Time.time * moveSpeed, moveHeight) + startPosition.y - offset;
         Vector3 newPosition = new Vector3(startPosition.x, newY, startPosition.z);
 
         // Determine how far the platform has moved since the last frame
