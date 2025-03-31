@@ -8,17 +8,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.001
-    second: {fileID: 2100000, guid: e5d80a650ab919f4cb21c8cb8ad5cd8b, type: 2}
+    second: {fileID: 2100000, guid: d6931ac6bb990bb4ba0e8d0e913f1041, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: TVHead1
-    second: {fileID: 2100000, guid: aa573ed96a876e943aa0037d63e34658, type: 2}
+    second: {fileID: 2100000, guid: ca1f969461385eb4fbebf67ed86d2725, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: TVHood
-    second: {fileID: 2100000, guid: 1442d550056a8cc4ea6bc287ee6758fa, type: 2}
+    second: {fileID: 2100000, guid: 80988429df640e44a830e1d6476c824d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
