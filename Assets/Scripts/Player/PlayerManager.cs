@@ -1,9 +1,11 @@
 using Cinemachine;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
+    private GameObject[] allCharacters;
     public GameObject characterA;
     public GameObject characterB;
     public GameObject activeCharacter;
@@ -15,16 +17,30 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         controls = new PlayerControls();
-        activeCharacter = characterA;
-
-        // Make sure only the active character has enabled input
-        SetActiveCharacter(activeCharacter);
-
-        characterController = activeCharacter.GetComponent<CharacterController3D>();
-        controls.Player.SwapCharacter.performed += ctx => SwapCharacter();
         
-        pCam.GetComponent<CinemachineFreeLook>().Follow = activeCharacter.transform;
-        pCam.GetComponent<CinemachineFreeLook>().LookAt = activeCharacter.transform;
+
+        allCharacters = GameObject.FindObjectsOfType<CharacterController3D>()
+            .Where(cc => cc != null) // Ensure the component exists
+            .Select(cc => cc.gameObject)
+            .ToArray();
+
+        characterA = allCharacters.FirstOrDefault(go => go.GetComponent<CharacterController3D>().ID == 1);
+        characterB = allCharacters.FirstOrDefault(go => go.GetComponent<CharacterController3D>().ID == 2);
+
+        if (characterA != null && characterB != null)
+        {
+            activeCharacter = characterA;
+            SetActiveCharacter(activeCharacter);
+            characterController = activeCharacter.GetComponent<CharacterController3D>();
+            controls.Player.SwapCharacter.performed += ctx => SwapCharacter();
+
+            pCam.GetComponent<CinemachineFreeLook>().Follow = activeCharacter.transform;
+            pCam.GetComponent<CinemachineFreeLook>().LookAt = activeCharacter.transform;
+        }
+        else
+        {
+            Debug.LogError("Characters with specified IDs not found.");
+        }
     }
 
     private void Update()

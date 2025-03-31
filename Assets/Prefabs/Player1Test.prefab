@@ -94,7 +94,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4460314080617430264}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 844f983d4b8bc014994c93ac7a1e38eb, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -136,7 +136,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &8984232322389709630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,13 +153,15 @@ MonoBehaviour:
   ID: 1
   maxSpeed: 10
   movementForce: 1
-  maxJumpHeight: 6
-  minJumpImpulse: 6
-  maxJumpHoldTime: 0.3
+  jumpheight: 6
   coyoteTime: 0.5
+  coyoteTimeCounter: 0
   jumpBufferTime: 0.1
+  jumpBufferCounter: 0
   maxJumps: 2
   jumpCount: 0
+  doubleJump: 0
+  jumpInput: 0
   maxFallSpeed: 20
   fastFallAcceleration: 35
   airControlMultiplier: 0.5
@@ -171,6 +173,9 @@ MonoBehaviour:
     m_Bits: 8
   manager: {fileID: 0}
   playerCamera: {fileID: 0}
+  extrajump: 0
+  grounded: 0
+  wasGrounded: 0
 --- !u!1 &5212057680540337015
 GameObject:
   m_ObjectHideFlags: 0

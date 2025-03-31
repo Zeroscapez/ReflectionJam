@@ -184,21 +184,26 @@ MonoBehaviour:
   ID: 2
   maxSpeed: 10
   movementForce: 1
-  maxJumpHeight: 6
-  minJumpImpulse: 6
-  maxJumpHoldTime: 0.3
+  jumpheight: 6
   coyoteTime: 0.5
+  coyoteTimeCounter: 0
   jumpBufferTime: 0.1
+  jumpBufferCounter: 0
   maxJumps: 2
   jumpCount: 0
+  doubleJump: 0
+  jumpInput: 0
   maxFallSpeed: 20
   fastFallAcceleration: 35
   airControlMultiplier: 0.5
   groundDistance: 1.25
-  groundCheck: {fileID: 0}
+  groundCheck: {fileID: 8824356929942335911}
   groundRadius: 0.3
   groundMask:
     serializedVersion: 2
     m_Bits: 8
   manager: {fileID: 0}
   playerCamera: {fileID: 0}
+  extrajump: 0
+  grounded: 0
+  wasGrounded: 0
