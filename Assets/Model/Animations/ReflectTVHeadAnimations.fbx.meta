@@ -8,17 +8,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: RelfectTVHEAD
-    second: {fileID: 2100000, guid: 034f1f4360dfb3d4a9554a1cc5fc138b, type: 2}
+    second: {fileID: 2100000, guid: c5d1598cee4a8b545ad996e40b458583, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: TVHead1
-    second: {fileID: 2100000, guid: 4e5e6a63f3b3b9a4490e5c5e87844113, type: 2}
+    second: {fileID: 2100000, guid: 06d510e5e98ed48428990ea125d5224b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: TVHood
-    second: {fileID: 2100000, guid: da4460f7cab944d499b0acff5d6ea368, type: 2}
+    second: {fileID: 2100000, guid: 06d510e5e98ed48428990ea125d5224b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
