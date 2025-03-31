@@ -36,8 +36,8 @@ public class CharacterController3D : MonoBehaviour
     private bool isJumping;
     private bool isHoldingJump;
     [SerializeField] private bool doubleJump;
-    
-  
+    public Vector3 rayOrigin;
+
     public bool jumpInput;
 
     [Header("Fast Fall Settings")]
@@ -81,6 +81,7 @@ public class CharacterController3D : MonoBehaviour
 
     private void Update()
     {
+        
         bool wasPreviouslyGrounded = grounded; // Store the previous grounded state before checking again
         IsGrounded(); // Update grounded state
 
@@ -312,16 +313,29 @@ public class CharacterController3D : MonoBehaviour
     void Interact()
     {
         Debug.Log(Name + " " + ID.ToString() + " Interact Button Pressed");
-        Ray ray = new Ray(transform.position, transform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, 3f))
+
+        // Define where we check for objects (around the player's chest)
+        Vector3 checkPosition = transform.position + transform.forward * 1.5f + Vector3.up * 0.5f;
+        float detectionRadius = 1f; // Adjust for better range
+
+        // Check for nearby colliders
+        Collider[] colliders = Physics.OverlapSphere(checkPosition, detectionRadius);
+
+        foreach (Collider collider in colliders)
         {
-            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+            IInteractable interactable = collider.GetComponent<IInteractable>();
             if (interactable != null)
             {
+                Debug.Log("Interacting with: " + collider.name);
                 interactable.OnInteract();
+                return; // Stop after first valid interaction
             }
         }
+
+        Debug.Log("No interactable object found.");
     }
+
+
 
 
     void IsGrounded()
