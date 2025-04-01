@@ -1,4 +1,4 @@
-using Cinemachine.Utility;
+﻿using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Schema;
@@ -149,7 +149,7 @@ public class CharacterController3D : MonoBehaviour
             PlatformVelocity platformVel = transform.parent.GetComponent<PlatformVelocity>();
             if (platformVel != null)
             {
-                // Override only the Y component to match the platform�s Y velocity.
+                // Override only the Y component to match the platform’s Y velocity.
                 rb.velocity = new Vector3(rb.velocity.x, platformVel.CurrentVelocity.y, rb.velocity.z);
             }
         }
@@ -276,8 +276,29 @@ public class CharacterController3D : MonoBehaviour
 
             // If falling fast, give an extra boost to the jump
             float jumpForce = rb.velocity.y < -2f && !grounded ? jumpheight * 3f : jumpheight * 1.5f;
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Reset vertical velocity
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            animator.SetTrigger("Jump");
+
+            if (jumpCount == 0)
+            {
+                // First jump → Normal trigger
+                animator.SetTrigger("Jump");
+            }
+            else if (jumpCount >= 1)
+            {
+                // Double jump → Choose between "LiftJump" and normal "Jump"
+                animator.ResetTrigger("Jump"); // Ensure previous trigger doesn't block animation transition
+
+                if (IsLifting()) // Call a function to check if lifting
+                {
+                    animator.Play("TVHeadLiftJump.001", 0, 0f);
+                }
+                else
+                {
+                    animator.Play("TVHeadJump", 0, 0f); // Regular double jump
+                }
+            }
+
             coyoteTimeCounter = 0f;
             jumpBufferCounter = 0f;
 
@@ -294,6 +315,9 @@ public class CharacterController3D : MonoBehaviour
             jumpCount++;
         }
     }
+
+
+
 
 
 
@@ -359,5 +383,10 @@ public class CharacterController3D : MonoBehaviour
         grounded = Physics.Raycast(transform.position, -transform.up, groundCheckDistance, groundMask);
     }
 
+    private bool IsLifting()
+    {
+        PickupObject pickup = GetComponentInChildren<PickupObject>();
+        return pickup != null && pickup.lifting;
+    }
 
 }
