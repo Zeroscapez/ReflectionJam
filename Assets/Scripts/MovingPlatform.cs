@@ -10,6 +10,7 @@ public class MovingPlatform : MonoBehaviour
     public float moveDistance = 2f;
     public float moveSpeed = 1f;
     public bool startForward = true;
+    public bool activated = false; // New activation flag
 
     [Header("Rotation Settings")]
     public bool enableRotation = false;
@@ -28,6 +29,8 @@ public class MovingPlatform : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!activated) return; // Only execute if activated
+
         Vector3 newPosition = transform.position;
 
         switch (movementType)
@@ -56,6 +59,9 @@ public class MovingPlatform : MonoBehaviour
             transform.Rotate(rotationAxis * rotationSpeed * Time.deltaTime);
         }
     }
+
+    
+
 
     void OnCollisionEnter(Collision collision)
     {
