@@ -1,8 +1,10 @@
 using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class CharacterController3D : MonoBehaviour
 {
@@ -18,11 +20,13 @@ public class CharacterController3D : MonoBehaviour
     private float movementForce = 1f;
 
     [Header("Jump Settings")]
-    [SerializeField] private float maxJumpHeight = 10f;     // Desired maximum jump height in units
-    [SerializeField] private float minJumpImpulse = 5f;       // Initial upward velocity when jump is triggered
-    [SerializeField] private float maxJumpHoldTime = 0.3f;    // How long extra upward force can be applied
+
+    [SerializeField] private float jumpheight = 6f;       // Initial upward velocity when jump is triggered
+
     [SerializeField] private float coyoteTime = 0.1f;         // Time after leaving the ground when a jump is still allowed
+    [SerializeField] private float coyoteTimeCounter;
     [SerializeField] private float jumpBufferTime = 0.1f;     // Time before landing that jump input is buffered
+    [SerializeField] private float jumpBufferCounter;
     [SerializeField] private int maxJumps = 2;                // Maximum number of jumps (allows double jump)
     [SerializeField] private int jumpCount = 0;                               // Number of jumps performed since last grounded
 
@@ -32,13 +36,16 @@ public class CharacterController3D : MonoBehaviour
     private float jumpHoldStartTime;
     private bool isJumping;
     private bool isHoldingJump;
-    private bool jumpInput;
+    [SerializeField] private bool doubleJump;
+    public Vector3 rayOrigin;
+
+    public bool jumpInput;
 
     [Header("Fast Fall Settings")]
 
     [SerializeField] private float maxFallSpeed = 20f;          // Maximum downward speed
     [SerializeField] private float fastFallAcceleration = 10f; // Additional downward acceleration (gradual fast fall)
-   
+
     [SerializeField] private float airControlMultiplier = 0.5f;  // Multiplier for horizontal movement when in the air
 
     [Header("Ground Check")]
@@ -56,6 +63,13 @@ public class CharacterController3D : MonoBehaviour
     private Camera playerCamera;
     private InputAction move;
     private Vector3 playerScale;
+   
+
+    public int extrajump;
+
+    public bool grounded;
+    public bool wasGrounded;
+    private Animator animator;
     private void Awake()
     {
         manager = FindObjectOfType<PlayerManager>();
@@ -64,26 +78,50 @@ public class CharacterController3D : MonoBehaviour
         playerCamera = manager.pCam;
         playerScale = transform.localScale;
         controls.Player.Interact.performed += ctx => Interact();
+        animator = GetComponentInChildren<Animator>();
+        grounded = false;
+        
     }
 
     private void Update()
     {
-        if (IsGrounded())
+        
+        bool wasPreviouslyGrounded = grounded; // Store the previous grounded state before checking again
+        IsGrounded(); // Update grounded state
+
+        // Jump buffering: Store the jump input for a short time
+        if (jumpInput)
         {
-            lastGroundedTime = 0;
-            jumpCount = 0; // Reset jump count when grounded
+            jumpBufferCounter = jumpBufferTime;
+        }
+        else if (jumpBufferCounter > 0)
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+
+        // Coyote time logic (allow jumping slightly after leaving ground)
+        if (grounded)
+        {
+            coyoteTimeCounter = coyoteTime;
+
+            // Reset jump count only when first landing
+            if (!wasPreviouslyGrounded) // Only triggers when transitioning from air to ground
+            {
+                jumpCount = 0;
+                doubleJump = false;
+            }
+           
         }
         else
         {
-            lastGroundedTime += Time.deltaTime;
+            coyoteTimeCounter -= Time.deltaTime;
         }
 
-        if (!jumpInput)
-        {
-            lastJumpPressTime += Time.deltaTime;
-        }
-        transform.localScale = playerScale;
+        transform.localScale = playerScale; // Keep player's scale constant
+
+        animator.SetBool("on_floor", grounded);
     }
+
 
 
 
@@ -103,8 +141,8 @@ public class CharacterController3D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        HandleBufferedJump();
-        HandleJumpHold();
+     
+
         // If the player is attached to a moving platform, override their vertical velocity.
         if (transform.parent != null && transform.parent.CompareTag("MovingPlatform"))
         {
@@ -116,9 +154,7 @@ public class CharacterController3D : MonoBehaviour
             }
         }
 
-        // Then continue with your normal movement, jump, and fast-fall handling.
-       
-        
+
         HandleMovement();
         ApplyFastFall();
     }
@@ -127,7 +163,7 @@ public class CharacterController3D : MonoBehaviour
     private void HandleMovement()
     {
         Vector2 moveInput = move.ReadValue<Vector2>();
-        float controlMultiplier = IsGrounded() ? 1f : airControlMultiplier; // Use air control if not grounded
+        float controlMultiplier = grounded ? 1f : airControlMultiplier; // Use air control if not grounded
         forceDirection += moveInput.x * GetCameraRight(playerCamera) * movementForce * controlMultiplier;
         forceDirection += moveInput.y * GetCameraForward(playerCamera) * movementForce * controlMultiplier;
 
@@ -141,7 +177,16 @@ public class CharacterController3D : MonoBehaviour
         {
             rb.velocity = horizontalVelocity.normalized * maxSpeed + Vector3.up * rb.velocity.y;
         }
-        LookAt();
+        if (grounded)
+        {
+            animator.SetFloat("Run", moveInput.magnitude);
+        }
+        else
+        {
+            animator.SetFloat("Run", -0.1f);
+        }
+
+            LookAt();
     }
 
 
@@ -173,89 +218,11 @@ public class CharacterController3D : MonoBehaviour
         return right.normalized;
     }
 
-    // Check for buffered jump input, coyote time, and allow double jump.
-    private void HandleBufferedJump()
-    {
-        // Only process jump if the jump input was registered recently.
-        if (jumpInput && lastJumpPressTime < jumpBufferTime)
-        {
-            // Condition 1: Jump from ground (or within coyote time)
-            if (IsGrounded() || lastGroundedTime < coyoteTime)
-            {
-                PerformJump();
-                // Reset timers so the buffered jump is consumed.
-                lastJumpPressTime = jumpBufferTime;
-                lastGroundedTime = coyoteTime;
-            }
-            // Condition 2: Allow double jump if we're already in the air
-            else if (jumpCount < maxJumps - 1) // subtract one if the initial jump is counted separately
-            {
-                PerformJump();
-                jumpCount++; // Consume one jump
-            }
-        }
-    }
-
-
-    private void PerformJump()
-    {
-
-        if (transform.parent != null && transform.parent.CompareTag("MovingPlatform"))
-        {
-            Rigidbody platformRb = transform.parent.GetComponent<Rigidbody>();
-            if (platformRb != null)
-            {
-                rb.velocity += platformRb.velocity;
-            }
-        }
-        // Add jump impulse on top of the current vertical velocity.
-        rb.AddForce(Vector3.up * minJumpImpulse, ForceMode.Impulse);
-        isJumping = true;
-        jumpHoldStartTime = Time.time;
-        // Optionally, you can also reset jumpInput here to ensure the buffered jump is consumed.
-        jumpInput = false;
-
-        
-
-    }
-
-
-
-
-    // While the jump button is held and within the max hold time, add extra upward velocity.
-    private void HandleJumpHold()
-    {
-        if (isJumping && isHoldingJump)
-        {
-            float maxJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(Physics.gravity.y) * maxJumpHeight);
-            float holdDuration = Time.time - jumpHoldStartTime;
-            if (holdDuration < maxJumpHoldTime)
-            {
-                float extraAcceleration = (maxJumpVelocity - minJumpImpulse) / maxJumpHoldTime;
-                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y + extraAcceleration * Time.fixedDeltaTime, rb.velocity.z);
-                rb.velocity = new Vector3(rb.velocity.x, Mathf.Min(rb.velocity.y, maxJumpVelocity), rb.velocity.z);
-            }
-        }
-    }
-
-    // Increase falling speed when falling until a maximum fall speed is reached.
-    private void ApplyFastFall()
-    {
-        if (rb.velocity.y < 0)
-        {
-            // Gradually add extra downward acceleration.
-            float newVelocityY = rb.velocity.y - fastFallAcceleration * Time.fixedDeltaTime;
-            // Clamp the downward velocity to not exceed -maxFallSpeed.
-            newVelocityY = Mathf.Max(newVelocityY, -maxFallSpeed);
-            rb.velocity = new Vector3(rb.velocity.x, newVelocityY, rb.velocity.z);
-        }
-    }
-
 
     private void OnJumpPerformed(InputAction.CallbackContext context)
     {
         Vector3 platformVelocity = Vector3.zero;
-
+        
         if (transform.parent != null && transform.parent.CompareTag("MovingPlatform"))
         {
             PlatformVelocity platformVel = transform.parent.GetComponent<PlatformVelocity>();
@@ -271,23 +238,80 @@ public class CharacterController3D : MonoBehaviour
         if (platformVelocity.y <= -1)
         {
             rb.velocity -= platformVelocity;
-        } else if (platformVelocity.y >= 0)
+        }
+        else if (platformVelocity.y >= 0)
         {
             rb.velocity += platformVelocity;
         }
 
+        
 
-            // Apply the jump force
-            rb.AddForce(Vector3.up * minJumpImpulse, ForceMode.Impulse);
 
-        isJumping = true;
+            Jump();
+
+
+        //if (!grounded && jumpCount == 0)
+        //{
+        //    Jump();
+        //    jumpCount = 3;
+        //}
+
+
         jumpHoldStartTime = Time.time;
         isHoldingJump = true;
+    }
+
+    public void Jump()
+    {
+        if (grounded)
+        {
+            Debug.Log("Boing");
+            doubleJump = false; // Reset double jump
+            jumpCount = 0; // Reset jump count on ground
+        }
+
+        if ((coyoteTimeCounter > 0f || jumpBufferCounter > 0f) || (doubleJump && jumpCount < maxJumps))
+        {
+            Debug.Log("Jump Activated");
+
+            // If falling fast, give an extra boost to the jump
+            float jumpForce = rb.velocity.y < -2f && !grounded ? jumpheight * 3f : jumpheight * 1.5f;
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            animator.SetTrigger("Jump");
+            coyoteTimeCounter = 0f;
+            jumpBufferCounter = 0f;
+
+            // If the player fell off a ledge, only allow a single jump.
+            if (!grounded && jumpCount == 0)
+            {
+                doubleJump = false; // No double jump if they walked off
+            }
+            else
+            {
+                doubleJump = !doubleJump;
+            }
+
+            jumpCount++;
+        }
     }
 
 
 
 
+
+
+    // Increase falling speed when falling until a maximum fall speed is reached.
+    private void ApplyFastFall()
+    {
+        if (rb.velocity.y < 0)
+        {
+            // Gradually add extra downward acceleration.
+            float newVelocityY = rb.velocity.y - fastFallAcceleration * Time.fixedDeltaTime;
+            // Clamp the downward velocity to not exceed -maxFallSpeed.
+            newVelocityY = Mathf.Max(newVelocityY, -maxFallSpeed);
+            rb.velocity = new Vector3(rb.velocity.x, newVelocityY, rb.velocity.z);
+        }
+    }
 
 
 
@@ -298,26 +322,42 @@ public class CharacterController3D : MonoBehaviour
         isHoldingJump = false;
         // End the jump hold.
         isJumping = false;
+        jumpBufferCounter -= Time.deltaTime;
     }
 
     void Interact()
     {
         Debug.Log(Name + " " + ID.ToString() + " Interact Button Pressed");
-        Ray ray = new Ray(transform.position, transform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, 3f))
+
+        // Define where we check for objects (around the player's chest)
+        Vector3 checkPosition = transform.position + transform.forward * 1.5f + Vector3.up * 0.5f;
+        float detectionRadius = 1f; // Adjust for better range
+
+        // Check for nearby colliders
+        Collider[] colliders = Physics.OverlapSphere(checkPosition, detectionRadius);
+
+        foreach (Collider collider in colliders)
         {
-            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+            IInteractable interactable = collider.GetComponent<IInteractable>();
             if (interactable != null)
             {
+                Debug.Log("Interacting with: " + collider.name);
                 interactable.OnInteract();
+                return; // Stop after first valid interaction
             }
         }
+
+        Debug.Log("No interactable object found.");
     }
 
-    // Robust ground check using a sphere.
-    private bool IsGrounded()
+
+
+
+    void IsGrounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, groundDistance + 0.1f, groundMask);
+        float groundCheckDistance = (GetComponent<CapsuleCollider>().height / 2) + 0.1f;
+        grounded = Physics.Raycast(transform.position, -transform.up, groundCheckDistance, groundMask);
     }
+
 
 }

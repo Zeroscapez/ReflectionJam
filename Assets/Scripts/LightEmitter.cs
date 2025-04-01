@@ -3,35 +3,34 @@ using System.Collections.Generic;
 
 public class LightEmitter : MonoBehaviour
 {
-    public int maxReflections = 5; // Maximum number of reflections
-    public float maxDistance = 20f; // Max distance the light travels
-    public LineRenderer lineRenderer; // Reference to LineRenderer
-
+    public LineRenderer lineRenderer;
+    public int maxBounces = 10; // Maximum number of light bounces
+    public Transform lightOrigin;
     void Start()
     {
         if (lineRenderer == null)
         {
             lineRenderer = gameObject.AddComponent<LineRenderer>();
         }
-        lineRenderer.positionCount = 0;
+        lineRenderer.positionCount = 90;
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;
     }
 
     void Update()
     {
-        CastLight(transform.position, transform.right, maxReflections);
+        CastLight(lightOrigin.position, -transform.up, maxBounces);
     }
 
-    void CastLight(Vector3 position, Vector3 direction, int reflectionsRemaining)
+    void CastLight(Vector3 position, Vector3 direction, int remainingBounces)
     {
         List<Vector3> lightPoints = new List<Vector3>();
         lightPoints.Add(position);
 
-        for (int i = 0; i < reflectionsRemaining; i++)
+        while (remainingBounces > 0) // Use bounce counter instead of infinite loop
         {
             RaycastHit hit;
-            if (Physics.Raycast(position, direction, out hit, maxDistance))
+            if (Physics.Raycast(position, direction, out hit, Mathf.Infinity))
             {
                 lightPoints.Add(hit.point);
 
@@ -40,17 +39,19 @@ public class LightEmitter : MonoBehaviour
                     ReflectiveSurface surface = hit.collider.GetComponent<ReflectiveSurface>();
                     if (surface != null)
                     {
-                        direction = surface.GetReflectionDirection(); // Get predefined reflection direction
+                        // Update direction/position and decrement bounce counter
+                        direction = surface.GetReflectionDirection();
                         position = hit.point;
+                        remainingBounces--;
                         continue;
                     }
                 }
 
-                break; // Stop if not reflective
+                break; // Exit if non-reflective or no surface component
             }
             else
             {
-                lightPoints.Add(position + direction * maxDistance);
+                lightPoints.Add(position + direction * 1000f);
                 break;
             }
         }

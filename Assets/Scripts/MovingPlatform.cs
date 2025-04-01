@@ -3,47 +3,57 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
+    public enum MovementType { None, Horizontal, Vertical, Rotational }
+
     [Header("Movement Settings")]
-    [Tooltip("Vertical movement height (amplitude)")]
-    public float moveHeight = 2f;
-    [Tooltip("Movement speed of the platform")]
+    public MovementType movementType = MovementType.None;
+    public float moveDistance = 2f;
     public float moveSpeed = 1f;
-    [Tooltip("Determines if the platform starts by moving up")]
-    public bool startGoingUp = true;
+    public bool startForward = true;
+
+    [Header("Rotation Settings")]
+    public bool enableRotation = false;
+    public float rotationSpeed = 30f;
+    public Vector3 rotationAxis = Vector3.up;
 
     private Vector3 startPosition;
     private float directionMultiplier;
     private List<Rigidbody> playersOnPlatform = new List<Rigidbody>();
 
-    private float offset;
-
     void Start()
     {
         startPosition = transform.position;
-       
-
-        offset = startGoingUp ? 0f : moveHeight;
+        directionMultiplier = startForward ? 1f : -1f;
     }
 
     void FixedUpdate()
     {
-        // Calculate the new Y position using a sine wave with direction control
-        float newY = Mathf.PingPong(Time.time * moveSpeed, moveHeight) + startPosition.y - offset;
-        Vector3 newPosition = new Vector3(startPosition.x, newY, startPosition.z);
+        Vector3 newPosition = transform.position;
 
-        // Determine how far the platform has moved since the last frame
+        switch (movementType)
+        {
+            case MovementType.Horizontal:
+                newPosition.x = startPosition.x + Mathf.PingPong(Time.time * moveSpeed, moveDistance) * directionMultiplier;
+                break;
+            case MovementType.Vertical:
+                newPosition.y = startPosition.y + Mathf.PingPong(Time.time * moveSpeed, moveDistance) * directionMultiplier;
+                break;
+        }
+
         Vector3 deltaMovement = newPosition - transform.position;
-
-        // Move the platform to the new position
         transform.position = newPosition;
 
-        // Move each player by the same delta so they remain "attached" to the platform
         foreach (Rigidbody playerRb in playersOnPlatform)
         {
             if (playerRb != null)
             {
                 playerRb.MovePosition(playerRb.position + deltaMovement);
             }
+        }
+
+        if (enableRotation)
+        {
+            transform.Rotate(rotationAxis * rotationSpeed * Time.deltaTime);
         }
     }
 

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MovingPlatform
   - Reflective
+  - ObjectHolder
   layers:
   - Default
   - TransparentFX
