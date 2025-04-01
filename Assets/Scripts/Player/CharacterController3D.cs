@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class CharacterController3D : MonoBehaviour
 {
@@ -62,6 +63,7 @@ public class CharacterController3D : MonoBehaviour
     private Camera playerCamera;
     private InputAction move;
     private Vector3 playerScale;
+   
 
     public int extrajump;
 
@@ -75,6 +77,7 @@ public class CharacterController3D : MonoBehaviour
         playerCamera = manager.pCam;
         playerScale = transform.localScale;
         controls.Player.Interact.performed += ctx => Interact();
+       
         grounded = false;
         
     }
@@ -113,6 +116,7 @@ public class CharacterController3D : MonoBehaviour
         }
 
         transform.localScale = playerScale; // Keep player's scale constant
+
     }
 
 
@@ -202,7 +206,6 @@ public class CharacterController3D : MonoBehaviour
         return right.normalized;
     }
 
-    
 
     private void OnJumpPerformed(InputAction.CallbackContext context)
     {

@@ -5,21 +5,21 @@ public class LightEmitter : MonoBehaviour
 {
     public LineRenderer lineRenderer;
     public int maxBounces = 10; // Maximum number of light bounces
-
+    public Transform lightOrigin;
     void Start()
     {
         if (lineRenderer == null)
         {
             lineRenderer = gameObject.AddComponent<LineRenderer>();
         }
-        lineRenderer.positionCount = 0;
+        lineRenderer.positionCount = 90;
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;
     }
 
     void Update()
     {
-        CastLight(transform.position, transform.right, maxBounces);
+        CastLight(lightOrigin.position, -transform.up, maxBounces);
     }
 
     void CastLight(Vector3 position, Vector3 direction, int remainingBounces)
