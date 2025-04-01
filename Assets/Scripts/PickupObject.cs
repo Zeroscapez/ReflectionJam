@@ -117,9 +117,14 @@ public class PickupObject : MonoBehaviour, IInteractable
             Physics.IgnoreCollision(currentPlayerCollider, objectCollider, false);
         }
 
-        if (animator != null)
+        // Stop the current player's lifting animation
+        if (currentPlayerCollider != null)
         {
-            animator.SetBool("Is_Lifting", false);
+            Animator currentPlayerAnimator = currentPlayerCollider.GetComponentInChildren<Animator>();
+            if (currentPlayerAnimator != null)
+            {
+                currentPlayerAnimator.SetBool("Is_Lifting", false);
+            }
         }
 
         // Switch to the new holder
@@ -128,7 +133,7 @@ public class PickupObject : MonoBehaviour, IInteractable
         objectHolder = newHolder;
 
         // Update player colliders
-        lastPlayerCollider = currentPlayerCollider;
+        lastPlayerCollider = currentPlayerCollider;  // Previous holder is now lastPlayerCollider
         currentPlayerCollider = newHolder.GetComponentInParent<Collider>();
 
         // Ignore collision with the new player
@@ -136,9 +141,9 @@ public class PickupObject : MonoBehaviour, IInteractable
         {
             Physics.IgnoreCollision(currentPlayerCollider, objectCollider, true);
         }
-       
 
-        // Update animator for new player
+        // Update animator for the new player
+        animator = newHolder.GetComponentInParent<CharacterController3D>().GetComponentInChildren<Animator>();
         if (animator != null)
         {
             animator.SetBool("Is_Lifting", true);
@@ -158,17 +163,26 @@ public class PickupObject : MonoBehaviour, IInteractable
             Physics.IgnoreCollision(currentPlayerCollider, objectCollider, false);
         }
 
-        // Reset player reference
+        // Stop the current player's lifting animation
+        if (currentPlayerCollider != null)
+        {
+            Animator currentAnimator = currentPlayerCollider.GetComponentInChildren<Animator>();
+            if (currentAnimator != null)
+            {
+                currentAnimator.SetBool("Is_Lifting", false);
+            }
+        }
+
+        // Reset player references
         lastPlayerCollider = currentPlayerCollider;
         currentPlayerCollider = null;
         objectHolder = null;
 
-        // Reset animation state
-        if (animator != null)
-        {
-            animator.SetBool("Is_Lifting", false);
-        }
+        // Reset the animator reference
+        animator = null;
     }
+
+
 
     private void Update()
     {
