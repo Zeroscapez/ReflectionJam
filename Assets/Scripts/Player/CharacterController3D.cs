@@ -69,6 +69,7 @@ public class CharacterController3D : MonoBehaviour
 
     public bool grounded;
     public bool wasGrounded;
+    private Animator animator;
     private void Awake()
     {
         manager = FindObjectOfType<PlayerManager>();
@@ -77,7 +78,7 @@ public class CharacterController3D : MonoBehaviour
         playerCamera = manager.pCam;
         playerScale = transform.localScale;
         controls.Player.Interact.performed += ctx => Interact();
-       
+        animator = GetComponentInChildren<Animator>();
         grounded = false;
         
     }
@@ -109,6 +110,7 @@ public class CharacterController3D : MonoBehaviour
                 jumpCount = 0;
                 doubleJump = false;
             }
+           
         }
         else
         {
@@ -117,6 +119,7 @@ public class CharacterController3D : MonoBehaviour
 
         transform.localScale = playerScale; // Keep player's scale constant
 
+        animator.SetBool("on_floor", grounded);
     }
 
 
@@ -174,7 +177,16 @@ public class CharacterController3D : MonoBehaviour
         {
             rb.velocity = horizontalVelocity.normalized * maxSpeed + Vector3.up * rb.velocity.y;
         }
-        LookAt();
+        if (grounded)
+        {
+            animator.SetFloat("Run", moveInput.magnitude);
+        }
+        else
+        {
+            animator.SetFloat("Run", -0.1f);
+        }
+
+            LookAt();
     }
 
 
@@ -265,7 +277,7 @@ public class CharacterController3D : MonoBehaviour
             // If falling fast, give an extra boost to the jump
             float jumpForce = rb.velocity.y < -2f && !grounded ? jumpheight * 3f : jumpheight * 1.5f;
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
+            animator.SetTrigger("Jump");
             coyoteTimeCounter = 0f;
             jumpBufferCounter = 0f;
 

@@ -138,7 +138,7 @@ ModelImporter:
       name: TVHeadJump
       takeName: TVHeadJump
       internalID: -5900997159615401974
-      firstFrame: 0
+      firstFrame: 12
       lastFrame: 45
       wrapMode: 0
       orientationOffsetY: 0
