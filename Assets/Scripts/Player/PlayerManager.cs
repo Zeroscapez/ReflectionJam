@@ -9,6 +9,8 @@ public class PlayerManager : MonoBehaviour
     public GameObject activeCharacter;
     private CharacterController3D characterController;
     private PlayerControls controls;
+    public IGUIManager guiManager;
+    public bool isCharacterA;
    
     public Camera pCam;
 
@@ -29,7 +31,14 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-     
+     if (activeCharacter == characterA)
+        {
+            isCharacterA = true;
+        }
+        else
+        {
+            isCharacterA = false;
+        }
     }
 
 
@@ -43,6 +52,7 @@ public class PlayerManager : MonoBehaviour
         // Swap active character
         activeCharacter = (activeCharacter == characterA) ? characterB : characterA;
         SetActiveCharacter(activeCharacter);
+        guiManager.SwitchCharacterImage();
     }
 
     void SetActiveCharacter(GameObject character)
