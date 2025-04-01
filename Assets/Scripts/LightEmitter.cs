@@ -47,6 +47,11 @@ public class LightEmitter : MonoBehaviour
                     }
                 }
 
+                if (hit.collider.CompareTag("Switch"))
+                {
+                   hit.collider.GetComponent<SwitchControl>().Activate();
+                }
+
                 break; // Exit if non-reflective or no surface component
             }
             else
