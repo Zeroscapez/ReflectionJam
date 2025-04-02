@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MoveTest.unity
     guid: 200a1d4fb2b60384faf2b7c4395dd889
   - enabled: 1
-    path: Assets/Scenes/Level Design.unity
+    path: Assets/Scenes/Level 01.unity
     guid: e45b537136712fb4ba974d174dcf1aaa
   m_configObjects: {}
