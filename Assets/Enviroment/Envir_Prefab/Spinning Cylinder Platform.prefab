@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5826007147759910554}
   - component: {fileID: 6304415880165813552}
   - component: {fileID: 4383012972183816061}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spinning Cylinder Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2486,7 +2486,7 @@ GameObject:
   - component: {fileID: 5532195908872332732}
   - component: {fileID: 3897822301308288534}
   - component: {fileID: 4421822437896745862}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2894,7 +2894,7 @@ GameObject:
   - component: {fileID: 1953465833159303164}
   - component: {fileID: 2555747256459315553}
   - component: {fileID: 5142713494699596997}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (37)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

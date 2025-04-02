@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8898837380625979273}
   - component: {fileID: 2091151965461508362}
   - component: {fileID: 1974472138723403400}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -863,7 +863,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2147647492266388219}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Treadmill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
