@@ -70,6 +70,9 @@ public class CharacterController3D : MonoBehaviour
     public bool grounded;
     public bool wasGrounded;
     private Animator animator;
+
+    private Vector3 respawnPosition;
+
     private void Awake()
     {
         manager = FindObjectOfType<PlayerManager>();
@@ -81,6 +84,12 @@ public class CharacterController3D : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         grounded = false;
         
+    }
+
+    private void Start()
+    {
+        // Set the initial spawn position as the starting position
+        respawnPosition = transform.position;
     }
 
     private void Update()
@@ -123,7 +132,15 @@ public class CharacterController3D : MonoBehaviour
     }
 
 
+    public void SetCheckpoint(Vector3 newCheckpoint)
+    {
+        respawnPosition = newCheckpoint;
+    }
 
+    public void ResetToStartPosition()
+    {
+        transform.position = respawnPosition;
+    }
 
     void OnEnable()
     {
