@@ -64,6 +64,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""PauseButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""d12acc16-dc2e-4cb9-91c5-165a689a6c47"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Look"",
                     ""type"": ""PassThrough"",
                     ""id"": ""304cab3b-e993-4cbf-949e-8ec172eecf84"",
@@ -143,7 +152,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""id"": ""7487248c-3bbb-483e-83d0-f3c32c7843a1"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
@@ -207,7 +216,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ba071b8c-604d-425a-9bb9-0fa3be5ae973"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -217,10 +226,32 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""9023ec04-bffa-4d64-9ddb-d5664441e613"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a244a2d8-75ef-4741-b5a6-7a450d7f378c"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""9a13439e-a09f-41b3-97c4-ee32696fbe6c"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": """",
                     ""action"": ""Look"",
                     ""isComposite"": false,
@@ -238,7 +269,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""1D Axis"",
+                    ""name"": ""Keyboard Rotate"",
                     ""id"": ""71e9d044-b555-4c56-8a58-f83d3945b709"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
@@ -269,6 +300,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Controller Rotate"",
+                    ""id"": ""da93a874-9d7b-468d-ad0e-e9000dd26501"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""a8831278-0f5a-401a-b476-b750bebc7263"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""1ab778de-88c8-46cb-b27c-2e2be6b638fc"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -281,6 +345,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_SwapCharacter = m_Player.FindAction("SwapCharacter", throwIfNotFound: true);
+        m_Player_PauseButton = m_Player.FindAction("PauseButton", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
     }
@@ -353,6 +418,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_SwapCharacter;
+    private readonly InputAction m_Player_PauseButton;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Rotate;
     public struct PlayerActions
@@ -363,6 +429,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @SwapCharacter => m_Wrapper.m_Player_SwapCharacter;
+        public InputAction @PauseButton => m_Wrapper.m_Player_PauseButton;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -386,6 +453,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SwapCharacter.started += instance.OnSwapCharacter;
             @SwapCharacter.performed += instance.OnSwapCharacter;
             @SwapCharacter.canceled += instance.OnSwapCharacter;
+            @PauseButton.started += instance.OnPauseButton;
+            @PauseButton.performed += instance.OnPauseButton;
+            @PauseButton.canceled += instance.OnPauseButton;
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
@@ -408,6 +478,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SwapCharacter.started -= instance.OnSwapCharacter;
             @SwapCharacter.performed -= instance.OnSwapCharacter;
             @SwapCharacter.canceled -= instance.OnSwapCharacter;
+            @PauseButton.started -= instance.OnPauseButton;
+            @PauseButton.performed -= instance.OnPauseButton;
+            @PauseButton.canceled -= instance.OnPauseButton;
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
@@ -437,6 +510,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnSwapCharacter(InputAction.CallbackContext context);
+        void OnPauseButton(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
     }
