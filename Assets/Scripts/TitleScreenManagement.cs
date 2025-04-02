@@ -203,18 +203,6 @@ public class TitleScreenManagement : MonoBehaviour
         cancelAction.performed -= ctx => BackToPreviousScreen();
     }
 
-    private void SelectButton(Button button)
-    {
-        if (button != null)
-        {
-            EventSystem.current.SetSelectedGameObject(null); // Clear the selection first
-            EventSystem.current.SetSelectedGameObject(button.gameObject); // Then set the new button
-        }
-        else
-        {
-            Debug.LogWarning("Button reference is missing!");
-        }
-    }
 
 
 }
