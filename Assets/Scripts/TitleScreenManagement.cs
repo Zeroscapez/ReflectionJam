@@ -40,7 +40,7 @@ public class TitleScreenManagement : MonoBehaviour
                 stagePreviewTwo.SetActive(false);
                 stageLeftCycle.interactable = false;
                 stageRightCycle.interactable = true;
-                currentLevel = "MoveTest";
+                currentLevel = "Level 01";
 
                 break;
             case 1:
@@ -48,7 +48,7 @@ public class TitleScreenManagement : MonoBehaviour
                 stagePreviewTwo.SetActive(true);
                 stageLeftCycle.interactable = true;
                 stageRightCycle.interactable = false;
-                currentLevel = "Level Design";
+                currentLevel = "MoveTest";
                 break;
         }
     }

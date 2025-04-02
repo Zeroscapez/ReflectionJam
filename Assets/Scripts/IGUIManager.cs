@@ -53,7 +53,7 @@ public class IGUIManager : MonoBehaviour
     public void SwitchCharacterImage()
     {
         character1.SetActive(!character1.activeSelf);
-        character2.SetActive(!character1.activeSelf);
+        character2.SetActive(!character2.activeSelf);
     }
 
     public void UpdateTimerUI()

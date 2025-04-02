@@ -48,14 +48,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-     if (activeCharacter == characterA)
-        {
-            isCharacterA = true;
-        }
-        else
-        {
-            isCharacterA = false;
-        }
+
     }
 
 
