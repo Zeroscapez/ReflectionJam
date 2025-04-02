@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5417015524126823111}
   - component: {fileID: 7259022484753901661}
   - component: {fileID: 5732481437130699618}
-  - component: {fileID: 3481731645269608620}
+  - component: {fileID: 4837322822213752583}
   m_Layer: 3
   m_Name: SpiralJumpcase
   m_TagString: Untagged
@@ -1078,7 +1078,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &3481731645269608620
+--- !u!114 &4837322822213752583
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1087,10 +1087,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1610973323256288902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66dd3b9eee2c8374fbc42abbb268a1ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 31ca88882bc3eb44681dcb108c996dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 50
+  movementType: 0
+  moveDistance: 2
+  moveSpeed: 1
+  startForward: 1
+  enableRotation: 1
+  rotationSpeed: 30
+  rotationAxis: {x: 0, y: 1, z: 0}
 --- !u!1 &1903735338031598853
 GameObject:
   m_ObjectHideFlags: 0
