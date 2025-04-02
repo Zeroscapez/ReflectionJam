@@ -1,11 +1,15 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class LightEmitter : MonoBehaviour
 {
     public LineRenderer lineRenderer;
     public int maxBounces = 10; // Maximum number of light bounces
     public Transform lightOrigin;
+
+    // Store the switch that was hit in the previous frame
+    private SwitchControl currentSwitch = null;
+
     void Start()
     {
         if (lineRenderer == null)
@@ -27,7 +31,10 @@ public class LightEmitter : MonoBehaviour
         List<Vector3> lightPoints = new List<Vector3>();
         lightPoints.Add(position);
 
-        while (remainingBounces > 0) // Use bounce counter instead of infinite loop
+        // Local variable to hold the switch hit in this cast
+        SwitchControl hitSwitch = null;
+
+        while (remainingBounces > 0)
         {
             RaycastHit hit;
             if (Physics.Raycast(position, direction, out hit, Mathf.Infinity))
@@ -39,26 +46,40 @@ public class LightEmitter : MonoBehaviour
                     ReflectiveSurface surface = hit.collider.GetComponent<ReflectiveSurface>();
                     if (surface != null)
                     {
-                        // Update direction/position and decrement bounce counter
+                        // Update direction and position, then decrement bounce counter
                         direction = surface.GetReflectionDirection();
                         position = hit.point;
                         remainingBounces--;
                         continue;
                     }
                 }
-
-                if (hit.collider.CompareTag("Switch"))
+                else if (hit.collider.CompareTag("Switch"))
                 {
-                   hit.collider.GetComponent<SwitchControl>().Activate();
+                    SwitchControl switchControl = hit.collider.GetComponent<SwitchControl>();
+                    if (switchControl != null)
+                    {
+                        hitSwitch = switchControl;
+                        // Activate the switch if it's hit
+                        switchControl.Activate();
+                    }
                 }
-
-                break; // Exit if non-reflective or no surface component
+                break; // End the loop if we hit a non-reflective surface
             }
             else
             {
                 lightPoints.Add(position + direction * 1000f);
                 break;
             }
+        }
+
+        // Only call Deactivate if the switch hit this frame is different from the previously hit switch.
+        if (currentSwitch != hitSwitch)
+        {
+            if (currentSwitch != null)
+            {
+                currentSwitch.Deactivate();
+            }
+            currentSwitch = hitSwitch;
         }
 
         lineRenderer.positionCount = lightPoints.Count;

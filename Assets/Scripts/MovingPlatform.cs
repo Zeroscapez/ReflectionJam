@@ -19,6 +19,7 @@ public class MovingPlatform : MonoBehaviour
 
     private Vector3 startPosition;
     private float directionMultiplier;
+    private float progress = 0f; // This stores our movement progress
     private List<Rigidbody> playersOnPlatform = new List<Rigidbody>();
 
     void Start()
@@ -29,20 +30,26 @@ public class MovingPlatform : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!activated) return; // Only execute if activated
+        // Only update movement if activated. Otherwise, progress remains stored.
+        if (!activated) return;
+
+        // Increment our progress only when activated.
+        progress += Time.fixedDeltaTime * moveSpeed;
 
         Vector3 newPosition = transform.position;
 
+        // Use the stored progress variable in the PingPong calculation.
         switch (movementType)
         {
             case MovementType.Horizontal:
-                newPosition.x = startPosition.x + Mathf.PingPong(Time.time * moveSpeed, moveDistance) * directionMultiplier;
+                newPosition.x = startPosition.x + Mathf.PingPong(progress, moveDistance) * directionMultiplier;
                 break;
             case MovementType.Vertical:
-                newPosition.y = startPosition.y + Mathf.PingPong(Time.time * moveSpeed, moveDistance) * directionMultiplier;
+                newPosition.y = startPosition.y + Mathf.PingPong(progress, moveDistance) * directionMultiplier;
                 break;
         }
 
+        // Calculate the movement delta to also move any players on the platform.
         Vector3 deltaMovement = newPosition - transform.position;
         transform.position = newPosition;
 
@@ -54,14 +61,12 @@ public class MovingPlatform : MonoBehaviour
             }
         }
 
+        // Optionally update rotation if enabled.
         if (enableRotation)
         {
-            transform.Rotate(rotationAxis * rotationSpeed * Time.deltaTime);
+            transform.Rotate(rotationAxis * rotationSpeed * Time.fixedDeltaTime);
         }
     }
-
-    
-
 
     void OnCollisionEnter(Collision collision)
     {
