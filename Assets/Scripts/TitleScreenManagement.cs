@@ -97,7 +97,7 @@ public class TitleScreenManagement : MonoBehaviour
                 stagePreviewTwo.SetActive(true);
                 stageLeftCycle.interactable = true;
                 stageRightCycle.interactable = false;
-                currentLevel = "MoveTest";
+                currentLevel = "Level 02";
                 break;
         }
     }
@@ -203,6 +203,21 @@ public class TitleScreenManagement : MonoBehaviour
         cancelAction.performed -= ctx => BackToPreviousScreen();
     }
 
+    IEnumerator LoadLevel(string sceneName)
+{
+    AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+    while (!operation.isDone)
+    {
+        yield return null; // Wait until scene loads
+    }
+
+    // Now safely get PlayerManager references
+    PlayerManager playerManager = FindObjectOfType<PlayerManager>();
+    if (playerManager == null)
+    {
+        Debug.LogError("PlayerManager not found after scene load!");
+    }
+}
 
 
 }

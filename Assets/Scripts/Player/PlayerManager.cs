@@ -23,28 +23,14 @@ public class PlayerManager : MonoBehaviour
        pCam = GetComponentInChildren<Camera>();
         guiManager = GetComponentInParent<GameManager>().GetComponentInChildren<IGUIManager>();
 
-        allCharacters = GameObject.FindObjectsOfType<CharacterController3D>()
-            .Where(cc => cc != null) // Ensure the component exists
-            .Select(cc => cc.gameObject)
-            .ToArray();
+       
 
-        characterA = allCharacters.FirstOrDefault(go => go.GetComponent<CharacterController3D>().ID == 1);
-        characterB = allCharacters.FirstOrDefault(go => go.GetComponent<CharacterController3D>().ID == 2);
+     
+    }
 
-        if (characterA != null && characterB != null)
-        {
-            activeCharacter = characterA;
-            SetActiveCharacter(activeCharacter);
-            characterController = activeCharacter.GetComponent<CharacterController3D>();
-            controls.Player.SwapCharacter.performed += ctx => SwapCharacter();
-
-            pCam.GetComponent<CinemachineFreeLook>().Follow = activeCharacter.transform;
-            pCam.GetComponent<CinemachineFreeLook>().LookAt = activeCharacter.transform;
-        }
-        else
-        {
-            Debug.LogError("Characters with specified IDs not found.");
-        }
+    public void Start()
+    {
+        
     }
 
     private void Update()
@@ -82,5 +68,28 @@ public class PlayerManager : MonoBehaviour
 
 
     }
+
+    public void SetupCharacters(CharacterController3D[] characterList)
+    {
+        allCharacters = characterList.Select(cc => cc.gameObject).ToArray();
+        characterA = allCharacters.FirstOrDefault(go => go.GetComponent<CharacterController3D>().ID == 1);
+        characterB = allCharacters.FirstOrDefault(go => go.GetComponent<CharacterController3D>().ID == 2);
+
+        if (characterA != null && characterB != null)
+        {
+            activeCharacter = characterA;
+            SetActiveCharacter(activeCharacter);
+            characterController = activeCharacter.GetComponent<CharacterController3D>();
+
+            controls.Player.SwapCharacter.performed += ctx => SwapCharacter();
+            pCam.GetComponent<CinemachineFreeLook>().Follow = activeCharacter.transform;
+            pCam.GetComponent<CinemachineFreeLook>().LookAt = activeCharacter.transform;
+        }
+        else
+        {
+            Debug.LogError("Characters with specified IDs not found.");
+        }
+    }
+
 
 }
