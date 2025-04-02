@@ -311,12 +311,12 @@ public class CharacterController3D : MonoBehaviour
         // - Within coyote time
         // - Jump buffering active
         // - Still has double jump available
-        if (coyoteTimeCounter > 0f || jumpBufferCounter > 0f || (doubleJump && jumpCount < maxJumps))
+        if ((coyoteTimeCounter > 0f || jumpBufferCounter > 0f) || (doubleJump && (jumpCount < maxJumps)))
         {
             Debug.Log("Jump Activated");
 
             // Extra boost if falling fast
-            float jumpForce = (rb.velocity.y < -2f && !grounded) ? jumpheight * 3f : jumpheight * 1.5f;
+            float jumpForce = jumpheight * 1.5f;
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Reset vertical velocity
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
@@ -333,11 +333,14 @@ public class CharacterController3D : MonoBehaviour
                 if (IsLifting()) // Special animation if lifting
                 {
                     animator.Play("TVHeadLiftJump.001", 0, 0f);
+                    
                 }
                 else
                 {
                     animator.Play("TVHeadJump", 0, 0f); // Regular double jump animation
                 }
+
+                jumpCount++;
             }
 
             // Reset coyote time and jump buffer after jumping
@@ -345,15 +348,22 @@ public class CharacterController3D : MonoBehaviour
             jumpBufferCounter = 0f;
 
             // If the player fell off a ledge but hasn't jumped yet, allow one extra jump
-            if (!grounded && jumpCount == 0)
+            if (!grounded && jumpCount == 0 || jumpCount == 1)
             {
                 doubleJump = true; // Enable double jump only if the player hasn't used it
+               
+              
+
             }
+
         }
         else
         {
             Debug.Log("Jump not activated: conditions not met");
         }
+
+
+        
     }
 
 
