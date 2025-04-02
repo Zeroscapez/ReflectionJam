@@ -1637,6 +1637,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1942982580}
     - target: {fileID: 8984232322389709630, guid: 60bb182841db3664eba12039dd724bc1, type: 3}
+      propertyPath: coyoteTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8984232322389709630, guid: 60bb182841db3664eba12039dd724bc1, type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 963194227}
