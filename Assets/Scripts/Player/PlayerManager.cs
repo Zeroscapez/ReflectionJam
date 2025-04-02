@@ -11,6 +11,8 @@ public class PlayerManager : MonoBehaviour
     public GameObject activeCharacter;
     private CharacterController3D characterController;
     private PlayerControls controls;
+    public IGUIManager guiManager;
+    public bool isCharacterA;
    
     public Camera pCam;
 
@@ -19,6 +21,7 @@ public class PlayerManager : MonoBehaviour
         controls = new PlayerControls();
         
        pCam = GetComponentInChildren<Camera>();
+        guiManager = GetComponentInParent<GameManager>().GetComponentInChildren<IGUIManager>();
 
         allCharacters = GameObject.FindObjectsOfType<CharacterController3D>()
             .Where(cc => cc != null) // Ensure the component exists
@@ -46,7 +49,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-     
+
     }
 
 
@@ -60,6 +63,7 @@ public class PlayerManager : MonoBehaviour
         // Swap active character
         activeCharacter = (activeCharacter == characterA) ? characterB : characterA;
         SetActiveCharacter(activeCharacter);
+        guiManager.SwitchCharacterImage();
     }
 
     void SetActiveCharacter(GameObject character)
