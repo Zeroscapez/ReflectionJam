@@ -265,43 +265,51 @@ public class CharacterController3D : MonoBehaviour
     {
         if (grounded)
         {
-            // Check if we have a buffered jump
-            if (jumpBufferCounter > 0f)
-            {
-                Debug.Log("Buffered Jump Activated");
-                jumpBufferCounter = 0f; // Consume the buffered jump
-            }
-
-            // Perform the normal jump
-            Debug.Log("Normal Jump Activated");
-            jumpCount = 1; // Reset jump count
-            doubleJump = true; // Allow a double jump
-
-            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-            float jumpForce = jumpheight * 1.5f;
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-            animator.SetTrigger("Jump");
+            Debug.Log("Boing");
+            doubleJump = false; // Reset double jump when touching ground
+            jumpCount = 0; // Reset jump count on ground
         }
-        else if (doubleJump && jumpCount < maxJumps)
-        {
-            // Perform the double jump
-            Debug.Log("Double Jump Activated");
-            jumpCount++;
-            doubleJump = false;
 
-            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-            float jumpForce = jumpheight * 1.5f;
+        // Allow jumping if:
+        // - Within coyote time
+        // - Jump buffering active
+        // - Still has double jump available
+        if (coyoteTimeCounter > 0f || jumpBufferCounter > 0f || (doubleJump && jumpCount < maxJumps))
+        {
+            Debug.Log("Jump Activated");
+
+            // Extra boost if falling fast
+            float jumpForce = (rb.velocity.y < -2f && !grounded) ? jumpheight * 3f : jumpheight * 1.5f;
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Reset vertical velocity
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
-            // Use different animations for double jump
-            if (IsLifting())
+            // Handle animations
+            if (jumpCount == 0)
             {
-                animator.Play("TVHeadLiftJump.001", 0, 0f);
+                animator.SetTrigger("Jump"); // First jump animation
             }
             else
             {
-                animator.Play("TVHeadJump", 0, 0f);
+                animator.ResetTrigger("Jump"); // Ensure proper animation transition
+
+                if (IsLifting()) // Special animation if lifting
+                {
+                    animator.Play("TVHeadLiftJump.001", 0, 0f);
+                }
+                else
+                {
+                    animator.Play("TVHeadJump", 0, 0f); // Regular double jump animation
+                }
+            }
+
+            // Reset coyote time and jump buffer after jumping
+            coyoteTimeCounter = 0f;
+            jumpBufferCounter = 0f;
+
+            // If the player fell off a ledge but hasn't jumped yet, allow one extra jump
+            if (!grounded && jumpCount == 0)
+            {
+                doubleJump = true; // Enable double jump only if the player hasn't used it
             }
         }
         else
@@ -309,7 +317,6 @@ public class CharacterController3D : MonoBehaviour
             Debug.Log("Jump not activated: conditions not met");
         }
     }
-
 
 
 
