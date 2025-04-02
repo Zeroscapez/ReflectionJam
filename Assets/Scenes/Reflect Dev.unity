@@ -2868,7 +2868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1398893399625788283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 4.000013
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1398893399625788283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.z
@@ -2916,7 +2916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127328162164557283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 4.000013
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2127328162164557283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.z
@@ -2924,7 +2924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6300985937432461409, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 4.000013
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6300985937432461409, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.z
@@ -3567,22 +3567,6 @@ PrefabInstance:
     - target: {fileID: 4460314080617430264, guid: 60bb182841db3664eba12039dd724bc1, type: 3}
       propertyPath: m_Name
       value: Player1Test
-      objectReference: {fileID: 0}
-    - target: {fileID: 8902783754133607856, guid: 60bb182841db3664eba12039dd724bc1, type: 3}
-      propertyPath: m_Drag
-      value: 1.78
-      objectReference: {fileID: 0}
-    - target: {fileID: 8902783754133607856, guid: 60bb182841db3664eba12039dd724bc1, type: 3}
-      propertyPath: m_Interpolate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8984232322389709630, guid: 60bb182841db3664eba12039dd724bc1, type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8984232322389709630, guid: 60bb182841db3664eba12039dd724bc1, type: 3}
-      propertyPath: playerCamera
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
