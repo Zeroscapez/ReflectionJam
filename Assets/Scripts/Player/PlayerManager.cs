@@ -18,6 +18,7 @@ public class PlayerManager : MonoBehaviour
     {
         controls = new PlayerControls();
         
+       pCam = GetComponentInChildren<Camera>();
 
         allCharacters = GameObject.FindObjectsOfType<CharacterController3D>()
             .Where(cc => cc != null) // Ensure the component exists
@@ -67,6 +68,10 @@ public class PlayerManager : MonoBehaviour
         // Enable PlayerInput on the active character and disable on the other.
         characterA.GetComponent<CharacterController3D>().enabled = (character == characterA);
         characterB.GetComponent<CharacterController3D>().enabled = (character == characterB);
+        characterA.GetComponentInChildren<Animator>().enabled = (character == characterA);
+        characterB.GetComponentInChildren<Animator>().enabled = (character == characterB);
+        characterA.GetComponent<Rigidbody>().isKinematic = (character != characterA);
+        characterB.GetComponent<Rigidbody>().isKinematic = (character != characterB);
         pCam.GetComponent<CinemachineFreeLook>().Follow = activeCharacter.transform;
         pCam.GetComponent<CinemachineFreeLook>().LookAt = activeCharacter.transform;
 
