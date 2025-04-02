@@ -21,6 +21,7 @@ public class PlayerManager : MonoBehaviour
         controls = new PlayerControls();
         
        pCam = GetComponentInChildren<Camera>();
+        guiManager = GetComponentInParent<GameManager>().GetComponentInChildren<IGUIManager>();
 
         allCharacters = GameObject.FindObjectsOfType<CharacterController3D>()
             .Where(cc => cc != null) // Ensure the component exists
