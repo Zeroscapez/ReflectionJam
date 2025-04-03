@@ -22,17 +22,27 @@ public class MovingPlatform : MonoBehaviour
     private float progress = 0f; // This stores our movement progress
     private List<Rigidbody> playersOnPlatform = new List<Rigidbody>();
 
+    public Vector3 currentVelocity;
+    private Vector3 previousPosition;
+
     void Start()
     {
         startPosition = transform.position;
         directionMultiplier = startForward ? 1f : -1f;
     }
 
+    public void Update()
+    {
+        
+        Vector3 newPosition = startPosition;
+        currentVelocity = gameObject.GetComponent<Transform>().position - newPosition;
+    }
+
     void FixedUpdate()
     {
         // Only update movement if activated. Otherwise, progress remains stored.
         if (!activated) return;
-
+        
         // Increment our progress only when activated.
         progress += Time.fixedDeltaTime * moveSpeed;
 
@@ -79,6 +89,7 @@ public class MovingPlatform : MonoBehaviour
             if (rb != null && !playersOnPlatform.Contains(rb))
             {
                 playersOnPlatform.Add(rb);
+                collision.rigidbody.transform.SetParent(transform);
                 Debug.Log("Parent");
                
             }
@@ -93,6 +104,7 @@ public class MovingPlatform : MonoBehaviour
             if (rb != null)
             {
                 playersOnPlatform.Remove(rb);
+                
             }
         }
     }
