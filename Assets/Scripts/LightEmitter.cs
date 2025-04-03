@@ -16,7 +16,8 @@ public class LightEmitter : MonoBehaviour
         {
             lineRenderer = gameObject.AddComponent<LineRenderer>();
         }
-        lineRenderer.positionCount = 90;
+
+        lineRenderer.positionCount = 0;
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;
     }

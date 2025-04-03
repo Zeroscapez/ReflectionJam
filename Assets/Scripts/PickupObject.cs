@@ -16,9 +16,11 @@ public class PickupObject : MonoBehaviour, IInteractable
     private Collider currentPlayerCollider; // Player holding the object
     private Collider lastPlayerCollider; // Player who last held the object
     [SerializeField] private Animator animator; // Animator for the player
+    public Vector3 cubeOrigin;
 
     private void Start()
     {
+        cubeOrigin = transform.position;
         rb = GetComponent<Rigidbody>();
         controls = new PlayerControls();
         rotate = controls.Player.Rotate; // Get rotation input
@@ -199,6 +201,14 @@ public class PickupObject : MonoBehaviour, IInteractable
         if (Mathf.Abs(rotateInput) > 0.1f) // Rotate only when input is detected
         {
             transform.Rotate(Vector3.up, rotateInput * rotationSpeed * Time.deltaTime);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Death"))
+        {
+            transform.position = cubeOrigin;
         }
     }
 }
