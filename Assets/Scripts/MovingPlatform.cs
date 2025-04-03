@@ -85,14 +85,10 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Rigidbody rb = collision.collider.attachedRigidbody;
-            if (rb != null && !playersOnPlatform.Contains(rb))
-            {
-                playersOnPlatform.Add(rb);
-
-                collision.rigidbody.transform.SetParent(transform);
+            
+                collision.gameObject.transform.SetParent(transform);
                
-            }
+            
         }
     }
 
@@ -100,12 +96,10 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Rigidbody rb = collision.collider.attachedRigidbody;
-            if (rb != null)
-            {
-                //playersOnPlatform.Remove(rb);
-                
-            }
+
+            collision.gameObject.transform.SetParent(null);
+
+
         }
     }
 }
