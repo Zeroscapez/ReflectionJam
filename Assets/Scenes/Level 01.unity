@@ -298,7 +298,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-32302
+  m_Name: pb_Mesh132066
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -19113,7 +19113,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30270
+  m_Name: pb_Mesh131624
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -40508,7 +40508,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh130186
+  m_Name: pb_Mesh132496
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -48886,7 +48886,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29926
+  m_Name: pb_Mesh131276
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -66285,7 +66285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1398893399625788283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 4.000012
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1398893399625788283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.z
@@ -66333,7 +66333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127328162164557283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 4.000012
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2127328162164557283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.z
@@ -66341,7 +66341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6300985937432461409, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 4.000012
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6300985937432461409, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.z
@@ -86052,6 +86052,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 167945710}
     m_Modifications:
+    - target: {fileID: 606659975398651489, guid: c1467798fd3e263468effa1dedb40363, type: 3}
+      propertyPath: movementType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5130167340939632413, guid: c1467798fd3e263468effa1dedb40363, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.997156
@@ -86402,10 +86406,6 @@ PrefabInstance:
     - target: {fileID: 536948764677415263, guid: 1309e379a8d42864980250e4c013f3de, type: 3}
       propertyPath: m_Name
       value: Sun
-      objectReference: {fileID: 0}
-    - target: {fileID: 1770210615538745599, guid: 1309e379a8d42864980250e4c013f3de, type: 3}
-      propertyPath: lightOrigin
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8326172726058477463, guid: 1309e379a8d42864980250e4c013f3de, type: 3}
       propertyPath: m_LocalPosition.x
