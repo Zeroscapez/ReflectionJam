@@ -39,7 +39,7 @@ public class IGUIManager : MonoBehaviour
         UpdateTimerUI();
     }
 
-    void LoseLife()
+    public void LoseLife()
     {
         if (lifeTracker != null)
         {
@@ -47,8 +47,19 @@ public class IGUIManager : MonoBehaviour
             {
                 lives -= 1;
             }
+            else
+            {
+                GameOver();
+
+            }
         }
     }
+
+    public void GameOver()
+    {
+
+    }
+
 
     public void SwitchCharacterImage()                      // Switches in game assets with the player character
     {
