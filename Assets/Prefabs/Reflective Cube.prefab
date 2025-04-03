@@ -164,6 +164,7 @@ MonoBehaviour:
   rotationSpeed: 100
   objectCollider: {fileID: 0}
   animator: {fileID: 0}
+  cubeOrigin: {x: 0, y: 0, z: 0}
 --- !u!1001 &9094405380425707132
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -172,6 +173,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3989914085926433300}
     m_Modifications:
+    - target: {fileID: 799840153073130110, guid: 623d6714ac9c98644859b4424be29e17, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52e32442fd5889842a52b2946567e513, type: 2}
     - target: {fileID: 2840313628031464055, guid: 623d6714ac9c98644859b4424be29e17, type: 3}
       propertyPath: m_Name
       value: ReflectionCube

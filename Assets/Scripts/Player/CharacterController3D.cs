@@ -93,7 +93,7 @@ public class CharacterController3D : MonoBehaviour
             Debug.LogError("SceneInitializer is not ready!");
             return;
         }
-
+        respawnPosition = transform.localPosition;
         manager = SceneInitializer.Instance.playerManager;
         playerCamera = manager.pCam;
     }
