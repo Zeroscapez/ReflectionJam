@@ -4,6 +4,8 @@ public class FinishLineManager : MonoBehaviour
 {
     public bool playerAAtFinish = false;
     public bool playerBAtFinish = false;
+    public GameObject playerA;
+    public GameObject playerB;
 
     public void CheckGameEnd()
     {

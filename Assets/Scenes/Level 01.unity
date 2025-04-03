@@ -44684,18 +44684,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinishLine (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 4177560427204301897, guid: 9a6002a40cd78494d81ff71e0ab9ea36, type: 3}
-      propertyPath: m_Size.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4177560427204301897, guid: 9a6002a40cd78494d81ff71e0ab9ea36, type: 3}
-      propertyPath: m_Size.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4177560427204301897, guid: 9a6002a40cd78494d81ff71e0ab9ea36, type: 3}
-      propertyPath: m_Size.z
-      value: 4
-      objectReference: {fileID: 0}
+    - target: {fileID: 4266600692417659669, guid: 9a6002a40cd78494d81ff71e0ab9ea36, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1671931086}
+    - target: {fileID: 4266600692417659669, guid: 9a6002a40cd78494d81ff71e0ab9ea36, type: 3}
+      propertyPath: targetPlayer
+      value: 
+      objectReference: {fileID: 1043782481}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -61534,6 +61530,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+--- !u!114 &1671931086 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3826785878294745776, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+  m_PrefabInstance: {fileID: 1671931085}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a336086ca1db24b4c8354a3e2b195b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1672578273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -79137,6 +79144,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinishLine (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4266600692417659669, guid: 9a6002a40cd78494d81ff71e0ab9ea36, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1671931086}
+    - target: {fileID: 4266600692417659669, guid: 9a6002a40cd78494d81ff71e0ab9ea36, type: 3}
+      propertyPath: targetPlayer
+      value: 
+      objectReference: {fileID: 1149981446}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
