@@ -44,6 +44,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6740412552431842382}
+  - component: {fileID: 3422428840270155289}
   - component: {fileID: 3243355224482980808}
   m_Layer: 3
   m_Name: Rotating Cylinder
@@ -69,6 +70,26 @@ Transform:
   - {fileID: 241996734492335245}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 199.956, y: 0, z: 90}
+--- !u!114 &3422428840270155289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5207932717177795008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ca88882bc3eb44681dcb108c996dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementType: 0
+  moveDistance: 2
+  moveSpeed: 1
+  startForward: 1
+  activated: 0
+  enableRotation: 1
+  rotationSpeed: 30
+  rotationAxis: {x: 0, y: 1, z: 0}
 --- !u!114 &3243355224482980808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,7 +124,7 @@ GameObject:
   - component: {fileID: 4912192968593181369}
   - component: {fileID: 5046807021601586635}
   - component: {fileID: 2619678180220161948}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
