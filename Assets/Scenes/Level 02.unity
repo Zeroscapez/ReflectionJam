@@ -50380,9 +50380,33 @@ PrefabInstance:
       propertyPath: m_FollowOffset.z
       value: -10
       objectReference: {fileID: 0}
+    - target: {fileID: 2504707609343635349, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -323
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504707609343635349, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 176
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167263868548579070, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167263868548579070, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 271
+      objectReference: {fileID: 0}
     - target: {fileID: 5454450966001425107, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_Name
       value: Managers
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505904904102322710, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505904904102322710, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6300985937432461409, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
