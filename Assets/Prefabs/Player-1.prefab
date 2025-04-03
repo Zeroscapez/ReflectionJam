@@ -186,7 +186,7 @@ MonoBehaviour:
   maxSpeed: 10
   movementForce: 1
   jumpheight: 6
-  coyoteTime: 0.5
+  coyoteTime: 2.8
   coyoteTimeCounter: 0
   jumpBufferTime: 0.1
   jumpBufferCounter: 0
