@@ -75,10 +75,10 @@ public class CharacterController3D : MonoBehaviour
 
     private void Awake()
     {
-        manager = FindObjectOfType<PlayerManager>();
+        
         controls = new PlayerControls();
         rb = GetComponent<Rigidbody>();
-        playerCamera = manager.pCam;
+        
         playerScale = transform.localScale;
         controls.Player.Interact.performed += ctx => Interact();
         animator = GetComponentInChildren<Animator>();
@@ -88,9 +88,16 @@ public class CharacterController3D : MonoBehaviour
 
     private void Start()
     {
-        // Set the initial spawn position as the starting position
-        respawnPosition = transform.position;
+        if (SceneInitializer.Instance == null || !SceneInitializer.Instance.isInitialized)
+        {
+            Debug.LogError("SceneInitializer is not ready!");
+            return;
+        }
+
+        manager = SceneInitializer.Instance.playerManager;
+        playerCamera = manager.pCam;
     }
+
 
     private void Update()
     {
@@ -158,7 +165,10 @@ public class CharacterController3D : MonoBehaviour
 
     private void FixedUpdate()
     {
-     
+        if(manager == null)
+        {
+            manager = SceneInitializer.Instance.playerManager;
+        }
 
         // If the player is attached to a moving platform, override their vertical velocity.
         if (transform.parent != null && transform.parent.CompareTag("MovingPlatform"))
@@ -181,8 +191,18 @@ public class CharacterController3D : MonoBehaviour
     {
         Vector2 moveInput = move.ReadValue<Vector2>();
         float controlMultiplier = grounded ? 1f : airControlMultiplier; // Use air control if not grounded
-        forceDirection += moveInput.x * GetCameraRight(playerCamera) * movementForce * controlMultiplier;
-        forceDirection += moveInput.y * GetCameraForward(playerCamera) * movementForce * controlMultiplier;
+
+        if (playerCamera == null){
+
+            playerCamera = FindObjectOfType<PlayerManager>().GetComponentInChildren<Camera>();
+
+        }
+        else
+        {
+            forceDirection += moveInput.x * GetCameraRight(playerCamera) * movementForce * controlMultiplier;
+            forceDirection += moveInput.y * GetCameraForward(playerCamera) * movementForce * controlMultiplier;
+        }
+           
 
         rb.AddForce(forceDirection, ForceMode.Impulse);
         forceDirection = Vector3.zero;
@@ -304,6 +324,7 @@ public class CharacterController3D : MonoBehaviour
             if (jumpCount == 0)
             {
                 animator.SetTrigger("Jump"); // First jump animation
+                jumpCount++;
             }
             else
             {
