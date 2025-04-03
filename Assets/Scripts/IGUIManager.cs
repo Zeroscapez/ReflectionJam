@@ -50,7 +50,7 @@ public class IGUIManager : MonoBehaviour
         }
     }
 
-    public void SwitchCharacterImage()
+    public void SwitchCharacterImage()                      // Switches in game assets with the player character
     {
         character1.SetActive(!character1.activeSelf);
         character2.SetActive(!character2.activeSelf);
