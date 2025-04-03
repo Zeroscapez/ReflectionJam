@@ -35175,7 +35175,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh390404
+  m_Name: pb_Mesh535956
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -47730,7 +47730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1398893399625788283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 4
+      value: 4.000009
       objectReference: {fileID: 0}
     - target: {fileID: 1398893399625788283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.z
@@ -47778,7 +47778,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127328162164557283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 4
+      value: 4.000009
       objectReference: {fileID: 0}
     - target: {fileID: 2127328162164557283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.z
@@ -47786,7 +47786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6300985937432461409, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 4
+      value: 4.000009
       objectReference: {fileID: 0}
     - target: {fileID: 6300985937432461409, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.z
