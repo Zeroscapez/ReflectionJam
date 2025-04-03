@@ -1,4 +1,4 @@
-# ReflectionJam
+# Inverse (https://ultima2b.itch.io/inverse)
 Beginner Game Jam 2025 Project
 
 # Controls
