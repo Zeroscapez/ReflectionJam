@@ -89,8 +89,8 @@ public class MovingPlatform : MonoBehaviour
             if (rb != null && !playersOnPlatform.Contains(rb))
             {
                 playersOnPlatform.Add(rb);
+
                 collision.rigidbody.transform.SetParent(transform);
-                Debug.Log("Parent");
                
             }
         }

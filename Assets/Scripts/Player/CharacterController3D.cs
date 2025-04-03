@@ -72,8 +72,6 @@ public class CharacterController3D : MonoBehaviour
     private Animator animator;
 
     private Vector3 respawnPosition;
-    public bool onPlatform;
-    public Vector3 velocityplat;
 
     private void Awake()
     {
@@ -261,37 +259,29 @@ public class CharacterController3D : MonoBehaviour
     private void OnJumpPerformed(InputAction.CallbackContext context)
     {
         Vector3 platformVelocity = Vector3.zero;
-
-
-
-        if (onPlatform)
-        {
-            
-                MovingPlatform platform = GetComponent<MovingPlatform>();
-                if (platform != null)
-                {
-                    platformVelocity = platform.currentVelocity; // Get the platform’s velocity
-                    Debug.Log("Velcoity");
-                    
-                }
-            
-        }
+        
+       
 
         // Subtract the platform's velocity from the player's velocity
 
-        if (velocityplat.y <= -1)
+        if (platformVelocity.y <= -1)
         {
-            rb.velocity -= velocityplat;
+            rb.velocity -= platformVelocity;
         }
-        else if (velocityplat.y >= 0)
+        else if (platformVelocity.y >= 0)
         {
-            rb.velocity += velocityplat;
+            rb.velocity += platformVelocity;
         }
 
 
 
-
-
+        if (transform.parent != null && transform.parent.CompareTag("MovingPlatform"))
+        {
+            Debug.Log(transform.parent);
+            transform.SetParent(null, true);
+            
+            
+        }
         Jump();
 
 
@@ -326,16 +316,7 @@ public class CharacterController3D : MonoBehaviour
             // Extra boost if falling fast
             float jumpForce = (rb.velocity.y < -2f && !grounded) ? jumpheight * 3f : jumpheight * 1.5f;
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Reset vertical velocity
-
-           if(onPlatform)
-            {
-                rb.AddForce(Vector3.up * jumpForce , ForceMode.Impulse);
-            }
-            else
-            {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            }
-
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
             // Handle animations
             if (jumpCount == 0)
@@ -447,15 +428,4 @@ public class CharacterController3D : MonoBehaviour
         return pickup != null && pickup.lifting;
     }
 
-    public void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("MovingPlatform"))
-        {
-            velocityplat = Vector3.zero;
-            onPlatform = true;
-            velocityplat = collision.gameObject.GetComponent<MovingPlatform>().currentVelocity;
-        }
-
-        
-    }
 }
