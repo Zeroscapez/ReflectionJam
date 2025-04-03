@@ -20,6 +20,7 @@ public class IGUIManager : MonoBehaviour
 
     private float secondsCount;
     private int minuteCount;
+    public int hourCount;
 
     public PlayerManager playerManager;
 
@@ -68,13 +69,22 @@ public class IGUIManager : MonoBehaviour
 
     public void UpdateTimerUI()
     {
-        //set timer UI
+        // Update timer values
         secondsCount += Time.deltaTime;
-        timerText.text = minuteCount + ":" + (int)secondsCount;
+
         if (secondsCount >= 60)
         {
             minuteCount++;
             secondsCount = 0;
         }
+
+        if (minuteCount >= 60)
+        {
+            hourCount++;
+            minuteCount = 0;
+        }
+
+        // Format the timer display with leading zeros
+        timerText.text = $"{hourCount:00}:{minuteCount:00}:{(int)secondsCount:00}";
     }
 }

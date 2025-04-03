@@ -6,7 +6,8 @@ public class LightEmitter : MonoBehaviour
     public LineRenderer lineRenderer;
     public int maxBounces = 10; // Maximum number of light bounces
     public Transform lightOrigin;
-
+    public Material lightMaterial; // Assign this in inspector
+    public bool useCustomMaterial = true;
     // Store the switch that was hit in the previous frame
     private SwitchControl currentSwitch = null;
 
@@ -17,6 +18,18 @@ public class LightEmitter : MonoBehaviour
             lineRenderer = gameObject.AddComponent<LineRenderer>();
         }
 
+        // Material setup
+        if (useCustomMaterial && lightMaterial != null)
+        {
+            lineRenderer.material = lightMaterial;
+        }
+        else
+        {
+            // Default material setup
+            lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        }
+
+        // Rest of your existing Start() code...
         lineRenderer.positionCount = 0;
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;

@@ -184,15 +184,21 @@ public class TitleScreenManagement : MonoBehaviour
     }
     private void BackToPreviousScreen()
     {
+        if(stageSelectScreen != null)
+        {
+
+            if (stageSelectScreen.activeSelf)
+            {
+                StartGameClose();
+            }
+            else if (controlsScreen.activeSelf)
+            {
+                ControlsClose();
+            }
+
+        }
         // Return to start screen if in submenus
-        if (stageSelectScreen.activeSelf)
-        {
-            StartGameClose();
-        }
-        else if (controlsScreen.activeSelf)
-        {
-            ControlsClose();
-        }
+        
     }
 
 

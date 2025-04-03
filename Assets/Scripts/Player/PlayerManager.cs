@@ -21,7 +21,13 @@ public class PlayerManager : MonoBehaviour
         controls = new PlayerControls();
         
        pCam = GetComponentInChildren<Camera>();
-        guiManager = GetComponentInParent<GameManager>().GetComponentInChildren<IGUIManager>();
+
+        if(guiManager == null)
+        {
+            guiManager = GetComponentInParent<GameManager>().GetComponentInChildren<IGUIManager>();
+
+        }
+       
 
        
 
@@ -35,7 +41,11 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
+        if (guiManager == null)
+        {
+            guiManager = GetComponentInParent<GameManager>().GetComponentInChildren<IGUIManager>();
 
+        }
     }
 
 

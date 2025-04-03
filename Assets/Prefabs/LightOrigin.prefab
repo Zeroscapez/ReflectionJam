@@ -98,3 +98,5 @@ MonoBehaviour:
   lineRenderer: {fileID: 0}
   maxBounces: 10
   lightOrigin: {fileID: 4196569853384973136}
+  lightMaterial: {fileID: 4626653748220533649, guid: be9406e68fd769b4a935b4a1540a411f, type: 3}
+  useCustomMaterial: 1
