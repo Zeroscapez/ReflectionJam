@@ -281,10 +281,11 @@ public class CharacterController3D : MonoBehaviour
             rb.velocity += platformVelocity;
         }
 
-        
 
 
-            Jump();
+
+
+        Jump();
 
 
         //if (!grounded && jumpCount == 0)

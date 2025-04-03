@@ -79,6 +79,8 @@ public class MovingPlatform : MonoBehaviour
             if (rb != null && !playersOnPlatform.Contains(rb))
             {
                 playersOnPlatform.Add(rb);
+                Debug.Log("Parent");
+               
             }
         }
     }
