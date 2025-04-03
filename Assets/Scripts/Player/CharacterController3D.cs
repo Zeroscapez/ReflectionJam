@@ -156,7 +156,7 @@ public class CharacterController3D : MonoBehaviour
         move = controls.Player.Move;
         controls.Player.Enable();
     }
-    void OnDisable()
+    public void OnDisable()
     {
         controls.Player.Jump.performed -= OnJumpPerformed;
         controls.Player.Jump.canceled -= OnJumpCanceled;

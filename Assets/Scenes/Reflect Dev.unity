@@ -1314,6 +1314,8 @@ MonoBehaviour:
   enableRotation: 0
   rotationSpeed: 30
   rotationAxis: {x: 0, y: 1, z: 0}
+  playersOnPlatform: []
+  currentVelocity: {x: 0, y: 0, z: 0}
 --- !u!65 &408344542
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1700,6 +1702,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1535508521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &569182074 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8984232322389709630, guid: 60bb182841db3664eba12039dd724bc1, type: 3}
+  m_PrefabInstance: {fileID: 1011437652484696340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a5463233778804fa2adc0ddafa2db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &660935733
 Mesh:
   m_ObjectHideFlags: 0
@@ -2717,6 +2730,8 @@ MonoBehaviour:
   enableRotation: 0
   rotationSpeed: 30
   rotationAxis: {x: 0, y: 1, z: 0}
+  playersOnPlatform: []
+  currentVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1462134755
 GameObject:
   m_ObjectHideFlags: 0
@@ -2922,6 +2937,18 @@ PrefabInstance:
       propertyPath: m_FollowOffset.z
       value: -10
       objectReference: {fileID: 0}
+    - target: {fileID: 2186130695347995193, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186130695347995193, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494208223703094455, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6300985937432461409, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
       value: 4
@@ -2929,6 +2956,10 @@ PrefabInstance:
     - target: {fileID: 6300985937432461409, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.z
       value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404610643523400699, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_Name
+      value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 6676784502086220455, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2950,8 +2981,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7441264481614003155, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 569182074}
+    - target: {fileID: 8829985247353598830, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8829985247353598830, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8829985247353598830, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitToMainMenu
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7935671890593581930, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}

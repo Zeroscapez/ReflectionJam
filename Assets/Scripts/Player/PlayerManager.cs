@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject characterB;
     public GameObject activeCharacter;
     private CharacterController3D characterController;
-    private PlayerControls controls;
+    public PlayerControls controls;
     public IGUIManager guiManager;
     public bool isCharacterA;
    
