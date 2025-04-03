@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 5494208223703094455}
-  firstSelectedButton: {fileID: 0}
+  firstSelectedButton: {fileID: 400355320375100475}
   cancelAction: {fileID: -6270413183607896647, guid: cb4aa034d121fb346b2f49f97f68e902, type: 3}
   playerController: {fileID: 0}
   playerManager: {fileID: 0}
@@ -339,6 +339,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5524441859609876744, guid: ef5fd0c95f03ebb4bbaccde77d44d0f9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7441264481614003155}
     - target: {fileID: 5528352803747201031, guid: ef5fd0c95f03ebb4bbaccde77d44d0f9, type: 3}
       propertyPath: m_Colors.m_SelectedColor.b
       value: 0.9056604
@@ -383,6 +387,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7441264481614003155}
+    - target: {fileID: 8480534100069460894, guid: ef5fd0c95f03ebb4bbaccde77d44d0f9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7441264481614003155}
     - target: {fileID: 8955196867988842674, guid: ef5fd0c95f03ebb4bbaccde77d44d0f9, type: 3}
       propertyPath: timerText
       value: 
@@ -411,6 +419,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &400355320375100475 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6296116768088638981, guid: ef5fd0c95f03ebb4bbaccde77d44d0f9, type: 3}
+  m_PrefabInstance: {fileID: 5975737795785294398}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2629827177510225272 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8543627831882729286, guid: ef5fd0c95f03ebb4bbaccde77d44d0f9, type: 3}
