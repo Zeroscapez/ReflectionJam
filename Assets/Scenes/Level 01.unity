@@ -61390,6 +61390,22 @@ PrefabInstance:
       propertyPath: m_FollowOffset.z
       value: -10
       objectReference: {fileID: 0}
+    - target: {fileID: 3362312912655018636, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: timerText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3362312912655018636, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: character1
+      value: 
+      objectReference: {fileID: 1671931087}
+    - target: {fileID: 3362312912655018636, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: character2
+      value: 
+      objectReference: {fileID: 1671931086}
+    - target: {fileID: 3362312912655018636, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: lifeTracker
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6300985937432461409, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
       value: 4
@@ -61419,10 +61435,21 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 337059000758089706, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+--- !u!1 &1671931086 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2832523544178625056, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+  m_PrefabInstance: {fileID: 1671931085}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1671931087 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7408801713957163091, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+  m_PrefabInstance: {fileID: 1671931085}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1672578273
 PrefabInstance:
   m_ObjectHideFlags: 0

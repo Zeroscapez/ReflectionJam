@@ -182,19 +182,16 @@ public class TitleScreenManagement : MonoBehaviour
             Debug.LogWarning("No button is currently selected or the selected object is not a button.");
         }
     }
-    void BackToPreviousScreen()
+    private void BackToPreviousScreen()
     {
-        if (this == null) return; // Prevent running if this script is already destroyed
-
-        GameObject previousScreen = GameObject.Find("PreviousScreen");
-
-        if (previousScreen != null)
+        // Return to start screen if in submenus
+        if (stageSelectScreen.activeSelf)
         {
-            previousScreen.SetActive(true);
+            StartGameClose();
         }
-        else
+        else if (controlsScreen.activeSelf)
         {
-            Debug.LogWarning("Previous screen does not exist.");
+            ControlsClose();
         }
     }
 
