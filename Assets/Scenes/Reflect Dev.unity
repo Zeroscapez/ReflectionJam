@@ -2938,6 +2938,10 @@ PrefabInstance:
       value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 2186130695347995193, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_Transition
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186130695347995193, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_Navigation.m_Mode
       value: 3
       objectReference: {fileID: 0}
@@ -2945,9 +2949,25 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2186130695347995193, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1557af69ff385dc459c1a252aaeb9bc9, type: 3}
+    - target: {fileID: 2186130695347995193, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: edcf03f5a09effe4287f56275418eca2, type: 3}
+    - target: {fileID: 3607559503579613877, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3607559503579613877, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1c7001ef11382af4e8e978f875a725a9, type: 3}
     - target: {fileID: 5494208223703094455, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6300985937432461409, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
@@ -2956,6 +2976,18 @@ PrefabInstance:
     - target: {fileID: 6300985937432461409, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.z
       value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404488093760318653, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1125
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404488093760318653, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.33265
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404488093760318653, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -354
       objectReference: {fileID: 0}
     - target: {fileID: 6404610643523400699, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_Name
@@ -2977,6 +3009,14 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7032207378401926563, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7032207378401926563, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5c333fabc86583141995cc01f0a5fd85, type: 3}
     - target: {fileID: 7174426861073817208, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -2985,6 +3025,22 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 569182074}
+    - target: {fileID: 7625505162294001571, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1125
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625505162294001571, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.33265
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625505162294001571, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -102
+      objectReference: {fileID: 0}
+    - target: {fileID: 8829985247353598830, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_Transition
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8829985247353598830, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_Navigation.m_Mode
       value: 3
@@ -2994,12 +3050,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8829985247353598830, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4cdd93689e52e5e4b93012bbf5123309, type: 3}
+    - target: {fileID: 8829985247353598830, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f165032bd77b9d34cbc114b7a545a86e, type: 3}
+    - target: {fileID: 8829985247353598830, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: QuitToMainMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7935671890593581930, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+    - {fileID: 7190567036583594371, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+    - {fileID: 9097330446581957451, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+    - {fileID: 6345233939919316698, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}

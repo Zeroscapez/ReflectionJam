@@ -27,6 +27,7 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
         playerManager = GetComponentInChildren<PlayerManager>();
+        pauseMenuUI.SetActive(false);
     }
 
     void TogglePause(InputAction.CallbackContext context)

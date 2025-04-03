@@ -15,6 +15,8 @@ public class IGUIManager : MonoBehaviour
     public GameObject character1;
     public GameObject character2;
     public TextMeshProUGUI timerText;
+    public GameObject timer1;
+    public GameObject timer2;
 
     private float secondsCount;
     private int minuteCount;
@@ -29,6 +31,8 @@ public class IGUIManager : MonoBehaviour
     {
         character1.SetActive(true);
         character2.SetActive(false);
+        timer1.SetActive(true);
+        timer2.SetActive(false);
     }
 
     // Update is called once per frame
@@ -39,7 +43,7 @@ public class IGUIManager : MonoBehaviour
         UpdateTimerUI();
     }
 
-    public void LoseLife()
+    void LoseLife()
     {
         if (lifeTracker != null)
         {
@@ -47,24 +51,19 @@ public class IGUIManager : MonoBehaviour
             {
                 lives -= 1;
             }
-            else
+            else if (lives == 0)
             {
-                GameOver();
-
+                Application.Quit();
             }
         }
     }
-
-    public void GameOver()
-    {
-
-    }
-
 
     public void SwitchCharacterImage()                      // Switches in game assets with the player character
     {
         character1.SetActive(!character1.activeSelf);
         character2.SetActive(!character2.activeSelf);
+        timer1.SetActive(!character2.activeSelf);
+        timer2.SetActive(!character2.activeSelf);
     }
 
     public void UpdateTimerUI()
