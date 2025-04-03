@@ -120,6 +120,10 @@ PrefabInstance:
       propertyPath: m_FollowOffset.y
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1793247336099608286, guid: 82e7296cd9111174eb30acfb50c08811, type: 3}
+      propertyPath: m_Rigs.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2271469954572820913, guid: 82e7296cd9111174eb30acfb50c08811, type: 3}
       propertyPath: m_FollowOffset.y
       value: 4
@@ -184,7 +188,16 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1254804934002249513, guid: 82e7296cd9111174eb30acfb50c08811, type: 3}
+    - {fileID: 524674502439055304, guid: 82e7296cd9111174eb30acfb50c08811, type: 3}
+    - {fileID: 728173712442326109, guid: 82e7296cd9111174eb30acfb50c08811, type: 3}
+    - {fileID: 2271469954572820913, guid: 82e7296cd9111174eb30acfb50c08811, type: 3}
+    - {fileID: 7476862551384244169, guid: 82e7296cd9111174eb30acfb50c08811, type: 3}
+    - {fileID: 3363831055560331198, guid: 82e7296cd9111174eb30acfb50c08811, type: 3}
+    - {fileID: 6156896786224849971, guid: 82e7296cd9111174eb30acfb50c08811, type: 3}
+    - {fileID: 8829744011647555085, guid: 82e7296cd9111174eb30acfb50c08811, type: 3}
+    - {fileID: 7565603563040435819, guid: 82e7296cd9111174eb30acfb50c08811, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
