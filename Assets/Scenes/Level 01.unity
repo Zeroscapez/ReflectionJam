@@ -3557,7 +3557,7 @@ GameObject:
   - component: {fileID: 161881565}
   m_Layer: 0
   m_Name: RealTubes
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47730,11 +47730,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1398893399625788283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 4.10025
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1398893399625788283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -9.963984
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 1625410505257582512, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -47778,19 +47778,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127328162164557283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 4.10025
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2127328162164557283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -9.963984
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 6300985937432461409, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 4.10025
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6300985937432461409, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -9.963984
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 6676784502086220455, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_LocalRotation.w
