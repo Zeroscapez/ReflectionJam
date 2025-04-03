@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    public enum MovementType { None, Horizontal, Vertical, Rotational }
+    public enum MovementType { None, Horizontal, Vertical, Rotational, HorizontalFB }
 
     [Header("Movement Settings")]
     public MovementType movementType = MovementType.None;
@@ -20,7 +20,10 @@ public class MovingPlatform : MonoBehaviour
     private Vector3 startPosition;
     private float directionMultiplier;
     private float progress = 0f; // This stores our movement progress
-    private List<Rigidbody> playersOnPlatform = new List<Rigidbody>();
+    [SerializeField] private List<Rigidbody> playersOnPlatform = new List<Rigidbody>();
+
+    public Vector3 currentVelocity;
+    private Vector3 previousPosition;
 
     void Start()
     {
@@ -28,11 +31,18 @@ public class MovingPlatform : MonoBehaviour
         directionMultiplier = startForward ? 1f : -1f;
     }
 
+    public void Update()
+    {
+        
+        Vector3 newPosition = startPosition;
+        currentVelocity = gameObject.GetComponent<Transform>().position - newPosition;
+    }
+
     void FixedUpdate()
     {
         // Only update movement if activated. Otherwise, progress remains stored.
         if (!activated) return;
-
+        
         // Increment our progress only when activated.
         progress += Time.fixedDeltaTime * moveSpeed;
 
@@ -43,6 +53,9 @@ public class MovingPlatform : MonoBehaviour
         {
             case MovementType.Horizontal:
                 newPosition.x = startPosition.x + Mathf.PingPong(progress, moveDistance) * directionMultiplier;
+                break;
+            case MovementType.HorizontalFB:
+                newPosition.z = startPosition.z + Mathf.PingPong(progress, moveDistance) * directionMultiplier;
                 break;
             case MovementType.Vertical:
                 newPosition.y = startPosition.y + Mathf.PingPong(progress, moveDistance) * directionMultiplier;
@@ -72,11 +85,10 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Rigidbody rb = collision.collider.attachedRigidbody;
-            if (rb != null && !playersOnPlatform.Contains(rb))
-            {
-                playersOnPlatform.Add(rb);
-            }
+            
+                collision.gameObject.transform.SetParent(transform);
+               
+            
         }
     }
 
@@ -84,11 +96,10 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Rigidbody rb = collision.collider.attachedRigidbody;
-            if (rb != null)
-            {
-                playersOnPlatform.Remove(rb);
-            }
+
+            collision.gameObject.transform.SetParent(null);
+
+
         }
     }
 }

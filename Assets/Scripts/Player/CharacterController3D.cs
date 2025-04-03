@@ -71,7 +71,7 @@ public class CharacterController3D : MonoBehaviour
     public bool wasGrounded;
     private Animator animator;
 
-    private Vector3 respawnPosition;
+    [SerializeField] private Vector3 respawnPosition;
 
     private void Awake()
     {
@@ -83,7 +83,7 @@ public class CharacterController3D : MonoBehaviour
         controls.Player.Interact.performed += ctx => Interact();
         animator = GetComponentInChildren<Animator>();
         grounded = false;
-        
+        respawnPosition = transform.position;
     }
 
     private void Start()
@@ -93,7 +93,7 @@ public class CharacterController3D : MonoBehaviour
             Debug.LogError("SceneInitializer is not ready!");
             return;
         }
-
+        respawnPosition = transform.position;
         manager = SceneInitializer.Instance.playerManager;
         playerCamera = manager.pCam;
     }
@@ -260,15 +260,7 @@ public class CharacterController3D : MonoBehaviour
     {
         Vector3 platformVelocity = Vector3.zero;
         
-        if (transform.parent != null && transform.parent.CompareTag("MovingPlatform"))
-        {
-            PlatformVelocity platformVel = transform.parent.GetComponent<PlatformVelocity>();
-            if (platformVel != null)
-            {
-                platformVelocity = platformVel.CurrentVelocity;
-            }
-            transform.parent = null; // Unparent the player from the platform
-        }
+       
 
         // Subtract the platform's velocity from the player's velocity
 
@@ -281,10 +273,16 @@ public class CharacterController3D : MonoBehaviour
             rb.velocity += platformVelocity;
         }
 
-        
 
 
-            Jump();
+        if (transform.parent != null && transform.parent.CompareTag("MovingPlatform"))
+        {
+            Debug.Log(transform.parent);
+            transform.SetParent(null, true);
+            
+            
+        }
+        Jump();
 
 
         //if (!grounded && jumpCount == 0)

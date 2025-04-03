@@ -8,6 +8,7 @@ TagManager:
   - Reflective
   - ObjectHolder
   - Switch
+  - Death
   layers:
   - Default
   - TransparentFX
