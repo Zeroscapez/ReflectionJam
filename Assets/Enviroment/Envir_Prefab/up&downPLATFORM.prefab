@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c4d21a8eb2b3908499a83d9bd46e9417, type: 2}
+  - {fileID: 2100000, guid: 2de65cb9de4c5424c9db618567095729, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
       localPivot: {x: -4, y: 1}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: c4d21a8eb2b3908499a83d9bd46e9417, type: 2}
+    _mat: {fileID: 2100000, guid: 2de65cb9de4c5424c9db618567095729, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -169,7 +169,7 @@ MonoBehaviour:
       localPivot: {x: -4, y: 1}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: c4d21a8eb2b3908499a83d9bd46e9417, type: 2}
+    _mat: {fileID: 2100000, guid: 2de65cb9de4c5424c9db618567095729, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -198,7 +198,7 @@ MonoBehaviour:
       localPivot: {x: 4, y: 1}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: c4d21a8eb2b3908499a83d9bd46e9417, type: 2}
+    _mat: {fileID: 2100000, guid: 2de65cb9de4c5424c9db618567095729, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -227,7 +227,7 @@ MonoBehaviour:
       localPivot: {x: 4, y: 1}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: c4d21a8eb2b3908499a83d9bd46e9417, type: 2}
+    _mat: {fileID: 2100000, guid: 2de65cb9de4c5424c9db618567095729, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -256,7 +256,7 @@ MonoBehaviour:
       localPivot: {x: 4, y: -4}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: c4d21a8eb2b3908499a83d9bd46e9417, type: 2}
+    _mat: {fileID: 2100000, guid: 2de65cb9de4c5424c9db618567095729, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -285,7 +285,7 @@ MonoBehaviour:
       localPivot: {x: -4, y: -4}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: c4d21a8eb2b3908499a83d9bd46e9417, type: 2}
+    _mat: {fileID: 2100000, guid: 2de65cb9de4c5424c9db618567095729, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -466,6 +466,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ca88882bc3eb44681dcb108c996dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHeight: 2
+  movementType: 0
+  moveDistance: 2
   moveSpeed: 1
-  startGoingUp: 1
+  startForward: 1
+  activated: 0
+  enableRotation: 0
+  rotationSpeed: 30
+  rotationAxis: {x: 0, y: 1, z: 0}
