@@ -71,7 +71,7 @@ public class CharacterController3D : MonoBehaviour
     public bool wasGrounded;
     private Animator animator;
 
-    private Vector3 respawnPosition;
+    [SerializeField] private Vector3 respawnPosition;
 
     private void Awake()
     {
@@ -83,7 +83,7 @@ public class CharacterController3D : MonoBehaviour
         controls.Player.Interact.performed += ctx => Interact();
         animator = GetComponentInChildren<Animator>();
         grounded = false;
-        
+        respawnPosition = transform.position;
     }
 
     private void Start()
@@ -93,7 +93,7 @@ public class CharacterController3D : MonoBehaviour
             Debug.LogError("SceneInitializer is not ready!");
             return;
         }
-        respawnPosition = transform.localPosition;
+        respawnPosition = transform.position;
         manager = SceneInitializer.Instance.playerManager;
         playerCamera = manager.pCam;
     }
