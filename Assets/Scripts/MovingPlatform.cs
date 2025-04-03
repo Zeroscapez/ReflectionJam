@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    public enum MovementType { None, Horizontal, Vertical, Rotational }
+    public enum MovementType { None, Horizontal, Vertical, Rotational, HorizontalFB }
 
     [Header("Movement Settings")]
     public MovementType movementType = MovementType.None;
@@ -43,6 +43,9 @@ public class MovingPlatform : MonoBehaviour
         {
             case MovementType.Horizontal:
                 newPosition.x = startPosition.x + Mathf.PingPong(progress, moveDistance) * directionMultiplier;
+                break;
+            case MovementType.HorizontalFB:
+                newPosition.z = startPosition.z + Mathf.PingPong(progress, moveDistance) * directionMultiplier;
                 break;
             case MovementType.Vertical:
                 newPosition.y = startPosition.y + Mathf.PingPong(progress, moveDistance) * directionMultiplier;
