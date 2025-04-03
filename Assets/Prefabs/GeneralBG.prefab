@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 4628280802507549125}
   - component: {fileID: 777558395884981340}
   - component: {fileID: 6760833080822395235}
+  - component: {fileID: 5143451900350519923}
   m_Layer: 5
   m_Name: GeneralBG
   m_TagString: Untagged
@@ -179,6 +180,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5143451900350519923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6587568758920338697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ce33f5e8a34724a97f2c648e52c8e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7397032719569494932
 GameObject:
   m_ObjectHideFlags: 0
