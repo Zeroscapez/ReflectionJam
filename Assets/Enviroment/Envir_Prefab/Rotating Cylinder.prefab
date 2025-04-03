@@ -9168,6 +9168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6740412552431842382}
   - component: {fileID: 3422428840270155289}
+  - component: {fileID: 3243355224482980808}
   m_Layer: 3
   m_Name: Rotating Cylinder
   m_TagString: Untagged
@@ -9183,7 +9184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5207932717177795008}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6964112, y: -0.696411, z: -0.122522004, w: -0.12252201}
+  m_LocalRotation: {x: 0.69641143, y: -0.69641143, z: -0.122520275, w: -0.122520275}
   m_LocalPosition: {x: 42, y: 2.4843497, z: -17.799215}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9217,6 +9218,26 @@ MonoBehaviour:
   moveSpeed: 1
   startForward: 1
   activated: 0
+  enableRotation: 1
+  rotationSpeed: 30
+  rotationAxis: {x: 0, y: 1, z: 0}
+--- !u!114 &3243355224482980808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5207932717177795008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ca88882bc3eb44681dcb108c996dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementType: 0
+  moveDistance: 2
+  moveSpeed: 1
+  startForward: 1
+  activated: 1
   enableRotation: 1
   rotationSpeed: 30
   rotationAxis: {x: 0, y: 1, z: 0}
