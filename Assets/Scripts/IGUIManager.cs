@@ -43,7 +43,7 @@ public class IGUIManager : MonoBehaviour
         UpdateTimerUI();
     }
 
-    void LoseLife()
+    public void LoseLife()
     {
         if (lifeTracker != null)
         {
