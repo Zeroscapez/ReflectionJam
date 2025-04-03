@@ -183,7 +183,7 @@ public class TitleScreenManagement : MonoBehaviour
         }
     }
 
-    private void BackToPreviousScreen()
+    public void BackToPreviousScreen()
     {
         // Return to start screen if in submenus
         if (stageSelectScreen.activeSelf)
