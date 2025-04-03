@@ -10833,6 +10833,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5ef67c8cdc7c4be439d0081fdb12b2d9, type: 3}
   m_PrefabInstance: {fileID: 366959976}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &369756911 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3362312912655018636, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+  m_PrefabInstance: {fileID: 1671931085}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9a3943d05f946e41a8ac928ab6c7b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &370875354 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: efb547262adccef4c9ce5a5339ce84ad, type: 3}
@@ -78925,6 +78936,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 468329451538541895, guid: b68bb168862793749b0e3e93118aa7e7, type: 3}
+      propertyPath: IGUIManager
+      value: 
+      objectReference: {fileID: 369756911}
     - target: {fileID: 3159526786935536990, guid: b68bb168862793749b0e3e93118aa7e7, type: 3}
       propertyPath: m_Name
       value: DeathZone
