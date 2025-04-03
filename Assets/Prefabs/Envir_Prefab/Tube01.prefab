@@ -3980,9 +3980,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ca88882bc3eb44681dcb108c996dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHeight: 2
+  movementType: 0
+  moveDistance: 2
   moveSpeed: 1
-  startGoingUp: 1
+  startForward: 1
+  activated: 0
+  enableRotation: 0
+  rotationSpeed: 30
+  rotationAxis: {x: 0, y: 1, z: 0}
 --- !u!1 &1599982386013794847
 GameObject:
   m_ObjectHideFlags: 0
