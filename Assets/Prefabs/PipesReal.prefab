@@ -236,6 +236,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PipesReal
       objectReference: {fileID: 0}
+    - target: {fileID: 1530647413735169623, guid: a018192254b809a4b91601af159daae9, type: 3}
+      propertyPath: m_TagString
+      value: MovingPlatform
+      objectReference: {fileID: 0}
     - target: {fileID: 1594114821002468790, guid: a018192254b809a4b91601af159daae9, type: 3}
       propertyPath: m_Size.x
       value: 3.9562955

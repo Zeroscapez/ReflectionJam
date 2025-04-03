@@ -20,7 +20,7 @@ public class MovingPlatform : MonoBehaviour
     private Vector3 startPosition;
     private float directionMultiplier;
     private float progress = 0f; // This stores our movement progress
-    private List<Rigidbody> playersOnPlatform = new List<Rigidbody>();
+    [SerializeField] private List<Rigidbody> playersOnPlatform = new List<Rigidbody>();
 
     public Vector3 currentVelocity;
     private Vector3 previousPosition;
@@ -103,7 +103,7 @@ public class MovingPlatform : MonoBehaviour
             Rigidbody rb = collision.collider.attachedRigidbody;
             if (rb != null)
             {
-                playersOnPlatform.Remove(rb);
+                //playersOnPlatform.Remove(rb);
                 
             }
         }
