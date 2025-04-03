@@ -7,6 +7,15 @@ public class FinishLineManager : MonoBehaviour
     public GameObject playerA;
     public GameObject playerB;
 
+    public void Update()
+    {
+        if (playerA == null || playerB == null)
+        {
+            playerA = GetComponentInChildren<PlayerManager>().characterA;
+            playerB = GetComponentInChildren<PlayerManager>().characterB;
+
+        }
+    }
     public void CheckGameEnd()
     {
         if (playerAAtFinish && playerBAtFinish)

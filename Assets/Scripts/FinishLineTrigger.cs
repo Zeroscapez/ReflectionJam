@@ -5,6 +5,13 @@ public class FinishLineTrigger : MonoBehaviour
     public GameObject targetPlayer; // Assign the corresponding player in the Inspector
     public FinishLineManager manager;
 
+    public void Update()
+    {
+        if (manager == null)
+        {
+            manager = FindAnyObjectByType<FinishLineManager>();
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == targetPlayer)
