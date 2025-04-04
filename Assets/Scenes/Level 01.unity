@@ -33285,7 +33285,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh446888
+  m_Name: pb_Mesh582832
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -34338,7 +34338,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1319100
+  m_Name: pb_Mesh582436
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -36159,7 +36159,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-137386
+  m_Name: pb_Mesh-137378
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -70270,6 +70270,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1882756699}
   m_Mesh: {fileID: 1785683206}
+--- !u!1 &1883263141 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 640186475917823442, guid: d0785b94d1a571b4a9fcb3cd1c869a61, type: 3}
+  m_PrefabInstance: {fileID: 2665617523847897543}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1883263143
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883263141}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2124705421725058983, guid: 8896fd9dd7f312548b2320b7d18ac0d1, type: 3}
 --- !u!1001 &1884448467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80047,6 +80074,10 @@ PrefabInstance:
       propertyPath: jumpForce
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 640186475917823442, guid: d0785b94d1a571b4a9fcb3cd1c869a61, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1547239438415969026, guid: d0785b94d1a571b4a9fcb3cd1c869a61, type: 3}
       propertyPath: jumpForce
       value: 40
@@ -80146,7 +80177,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 640186475917823442, guid: d0785b94d1a571b4a9fcb3cd1c869a61, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1883263143}
   m_SourcePrefab: {fileID: 100100000, guid: d0785b94d1a571b4a9fcb3cd1c869a61, type: 3}
 --- !u!4 &2665617523847897544 stripped
 Transform:
