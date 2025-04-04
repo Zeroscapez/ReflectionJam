@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 962385819698993915, guid: 60bb182841db3664eba12039dd724bc1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -69.64
       objectReference: {fileID: 0}
     - target: {fileID: 962385819698993915, guid: 60bb182841db3664eba12039dd724bc1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.3
+      value: 25.96
       objectReference: {fileID: 0}
     - target: {fileID: 962385819698993915, guid: 60bb182841db3664eba12039dd724bc1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.2
+      value: -64.99
       objectReference: {fileID: 0}
     - target: {fileID: 962385819698993915, guid: 60bb182841db3664eba12039dd724bc1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -50,7 +50,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4460314080617430264, guid: 60bb182841db3664eba12039dd724bc1, type: 3}
       propertyPath: m_Name
-      value: Player1-Mirror
+      value: Player-1_Mirror
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699994391963360740, guid: 60bb182841db3664eba12039dd724bc1, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8902783754133607856, guid: 60bb182841db3664eba12039dd724bc1, type: 3}
+      propertyPath: m_Drag
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8984232322389709630, guid: 60bb182841db3664eba12039dd724bc1, type: 3}
       propertyPath: ID
