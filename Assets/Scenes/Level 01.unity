@@ -25021,7 +25021,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh33398
+  m_Name: pb_Mesh31956
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -62170,14 +62170,6 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 366734506366264172, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 17.009415
-      objectReference: {fileID: 0}
-    - target: {fileID: 366734506366264172, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -19.621214
-      objectReference: {fileID: 0}
     - target: {fileID: 1398893399625788283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
       value: 4
@@ -62226,6 +62218,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1937335784477037196, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_Rigs.Array.data[0]
+      value: 
+      objectReference: {fileID: 700449307}
+    - target: {fileID: 1937335784477037196, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_Rigs.Array.data[1]
+      value: 
+      objectReference: {fileID: 1405812367}
+    - target: {fileID: 1937335784477037196, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
+      propertyPath: m_Rigs.Array.data[2]
+      value: 
+      objectReference: {fileID: 830871582}
     - target: {fileID: 2127328162164557283, guid: f137d931eae5a4b4dbda14cb3c33590d, type: 3}
       propertyPath: m_FollowOffset.y
       value: 4
