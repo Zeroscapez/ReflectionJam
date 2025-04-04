@@ -70,7 +70,8 @@ public class CharacterController3D : MonoBehaviour
     public bool grounded;
     public bool wasGrounded;
     private Animator animator;
-
+    public float jumpDrag;
+    public float walkDrag;
     [SerializeField] private Vector3 respawnPosition;
 
     private void Awake()
@@ -96,6 +97,7 @@ public class CharacterController3D : MonoBehaviour
         respawnPosition = transform.position;
         manager = SceneInitializer.Instance.playerManager;
         playerCamera = manager.pCam;
+       
     }
 
 
@@ -115,6 +117,15 @@ public class CharacterController3D : MonoBehaviour
             jumpBufferCounter -= Time.deltaTime;
         }
 
+        if (!grounded )
+        {
+            rb.drag = jumpDrag;
+        }
+        else
+        {
+            rb.drag = walkDrag;
+        }
+
         // Coyote time logic (allow jumping slightly after leaving ground)
         if (grounded)
         {
@@ -126,7 +137,7 @@ public class CharacterController3D : MonoBehaviour
                 jumpCount = 0;
                 doubleJump = false;
             }
-           
+
         }
         else
         {
@@ -220,7 +231,7 @@ public class CharacterController3D : MonoBehaviour
         }
         else
         {
-            animator.SetFloat("Run", -0.1f);
+            animator.SetFloat("Run", 0.1f);
         }
 
             LookAt();

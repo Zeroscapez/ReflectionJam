@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4137670581271915184}
   - component: {fileID: 4174982328754492850}
   - component: {fileID: 4528153791307729121}
-  - component: {fileID: 8562318418841792529}
   - component: {fileID: 2834558397029048467}
   - component: {fileID: 7134718823788261745}
   - component: {fileID: 4597985472581475555}
@@ -389,23 +388,6 @@ MonoBehaviour:
   m_selectedFaces: 
   m_SelectedEdges: []
   m_selectedTriangles: 
---- !u!114 &8562318418841792529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3363028454489411027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9f3c068ea4e8a94a9a67fc67f1c84bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  moveHeight: 15
-  startGoingUp: 1
-  moveEnabled: 1
-  rotateEnabled: 0
 --- !u!65 &2834558397029048467
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -474,3 +456,5 @@ MonoBehaviour:
   enableRotation: 0
   rotationSpeed: 30
   rotationAxis: {x: 0, y: 1, z: 0}
+  playersOnPlatform: []
+  currentVelocity: {x: 0, y: 0, z: 0}

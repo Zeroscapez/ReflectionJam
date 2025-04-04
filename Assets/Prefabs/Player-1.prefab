@@ -209,6 +209,8 @@ MonoBehaviour:
   extrajump: 0
   grounded: 0
   wasGrounded: 0
+  jumpDrag: 2.5
+  walkDrag: 5
   respawnPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &5212057680540337015
 GameObject:
