@@ -62,7 +62,7 @@ public class PickupObject : MonoBehaviour, IInteractable
 
     private Transform GetActiveCharacterObjectHolder()
     {
-        PlayerManager manager = FindObjectOfType<PlayerManager>();
+        PlayerManager manager = FindFirstObjectByType<PlayerManager>();
         if (manager != null && manager.activeCharacter != null)
         {
             CharacterController3D characterController = manager.activeCharacter.GetComponent<CharacterController3D>();

@@ -218,7 +218,7 @@ public class TitleScreenManagement : MonoBehaviour
     }
 
     // Now safely get PlayerManager references
-    PlayerManager playerManager = FindObjectOfType<PlayerManager>();
+    PlayerManager playerManager = FindFirstObjectByType<PlayerManager>();
     if (playerManager == null)
     {
         Debug.LogError("PlayerManager not found after scene load!");

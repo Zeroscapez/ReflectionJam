@@ -17,18 +17,18 @@ public class Treadmill : MonoBehaviour
             {
                 // Normalize and scale treadmill direction
                 Vector3 movementDirection = treadmillDirection.normalized * treadmillSpeed;
-                Vector3 playerVelocity = rb.velocity;
+                Vector3 playerVelocity = rb.linearVelocity;
 
                 if (playerVelocity.magnitude > 0.1f) // Player is moving
                 {
                     // Reduce effectiveness of movement in treadmill's direction
                     Vector3 resistance = movementDirection * resistanceFactor;
-                    rb.velocity = playerVelocity - resistance;
+                    rb.linearVelocity = playerVelocity - resistance;
                 }
                 else
                 {
                     // Move the player exactly in the specified direction
-                    rb.velocity = movementDirection;
+                    rb.linearVelocity = movementDirection;
                 }
             }
         }

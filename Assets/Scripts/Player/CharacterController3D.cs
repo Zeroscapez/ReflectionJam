@@ -177,7 +177,7 @@ public class CharacterController3D : MonoBehaviour
             if (platformVel != null)
             {
                 // Override only the Y component to match the platform’s Y velocity.
-                rb.velocity = new Vector3(rb.velocity.x, platformVel.CurrentVelocity.y, rb.velocity.z);
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, platformVel.CurrentVelocity.y, rb.linearVelocity.z);
             }
         }
 
@@ -194,7 +194,7 @@ public class CharacterController3D : MonoBehaviour
 
         if (playerCamera == null){
 
-            playerCamera = FindObjectOfType<PlayerManager>().GetComponentInChildren<Camera>();
+            playerCamera = FindFirstObjectByType<PlayerManager>().GetComponentInChildren<Camera>();
 
         }
         else
@@ -208,11 +208,11 @@ public class CharacterController3D : MonoBehaviour
         forceDirection = Vector3.zero;
 
         // Clamp horizontal velocity as before.
-        Vector3 horizontalVelocity = rb.velocity;
+        Vector3 horizontalVelocity = rb.linearVelocity;
         horizontalVelocity.y = 0;
         if (horizontalVelocity.sqrMagnitude > maxSpeed * maxSpeed)
         {
-            rb.velocity = horizontalVelocity.normalized * maxSpeed + Vector3.up * rb.velocity.y;
+            rb.linearVelocity = horizontalVelocity.normalized * maxSpeed + Vector3.up * rb.linearVelocity.y;
         }
         if (grounded)
         {
@@ -229,7 +229,7 @@ public class CharacterController3D : MonoBehaviour
 
     private void LookAt()
     {
-        Vector3 direction = rb.velocity;
+        Vector3 direction = rb.linearVelocity;
         direction.y = 0f;
         if (move.ReadValue<Vector2>().sqrMagnitude > 0.1f && direction.sqrMagnitude > 0.1f)
         {
@@ -266,11 +266,11 @@ public class CharacterController3D : MonoBehaviour
 
         if (platformVelocity.y <= -1)
         {
-            rb.velocity -= platformVelocity;
+            rb.linearVelocity -= platformVelocity;
         }
         else if (platformVelocity.y >= 0)
         {
-            rb.velocity += platformVelocity;
+            rb.linearVelocity += platformVelocity;
         }
 
 
@@ -315,7 +315,7 @@ public class CharacterController3D : MonoBehaviour
 
             // Extra boost if falling fast
             float jumpForce = jumpheight * 1.5f;
-            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Reset vertical velocity
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z); // Reset vertical velocity
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
             // Handle animations
@@ -376,13 +376,13 @@ public class CharacterController3D : MonoBehaviour
     // Increase falling speed when falling until a maximum fall speed is reached.
     private void ApplyFastFall()
     {
-        if (rb.velocity.y < 0)
+        if (rb.linearVelocity.y < 0)
         {
             // Gradually add extra downward acceleration.
-            float newVelocityY = rb.velocity.y - fastFallAcceleration * Time.fixedDeltaTime;
+            float newVelocityY = rb.linearVelocity.y - fastFallAcceleration * Time.fixedDeltaTime;
             // Clamp the downward velocity to not exceed -maxFallSpeed.
             newVelocityY = Mathf.Max(newVelocityY, -maxFallSpeed);
-            rb.velocity = new Vector3(rb.velocity.x, newVelocityY, rb.velocity.z);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, newVelocityY, rb.linearVelocity.z);
         }
     }
 

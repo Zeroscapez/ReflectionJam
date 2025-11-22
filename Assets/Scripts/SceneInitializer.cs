@@ -34,7 +34,7 @@ public class SceneInitializer : MonoBehaviour
         yield return new WaitForEndOfFrame(); // Wait to ensure all objects are loaded
 
         // 1️⃣ Find or create PlayerManager
-        playerManager = FindObjectOfType<PlayerManager>();
+        playerManager = FindFirstObjectByType<PlayerManager>();
         if (playerManager == null)
         {
             Debug.LogError("PlayerManager not found in scene!");
@@ -42,7 +42,7 @@ public class SceneInitializer : MonoBehaviour
         }
 
         // 2️⃣ Find all CharacterController3D instances
-        characters = FindObjectsOfType<CharacterController3D>();
+        characters = FindObjectsByType<CharacterController3D>(FindObjectsSortMode.None);
 
         if (characters.Length == 0)
         {
